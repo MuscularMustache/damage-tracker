@@ -29,11 +29,22 @@ class EnemyList extends Component {
       });
   };
 
+  deleteEnemy = id => {
+    console.log('deleteEnemy');
+    db.table('enemies')
+      .delete(id)
+      .then(() => {
+        const newList = this.state.enemies.filter(enemy => enemy.id !== id);
+        this.setState({ enemies: newList });
+      });
+
+  }
+
   render() {
     const { enemies } = this.state;
     return (
   		<div>
-  			{enemies.map(enemy => <EnemyItem key={enemy.id} enemy={enemy} />)}
+  			{enemies.map(enemy => <EnemyItem key={enemy.id} enemy={enemy} deleteEnemy={this.deleteEnemy} />)}
   			<EnemyCreate addEnemy={this.addEnemy} />
   		</div>
   	);
