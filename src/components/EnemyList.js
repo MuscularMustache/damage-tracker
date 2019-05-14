@@ -30,14 +30,12 @@ class EnemyList extends Component {
   };
 
   deleteEnemy = id => {
-    console.log('deleteEnemy');
     db.table('enemies')
       .delete(id)
       .then(() => {
         const newList = this.state.enemies.filter(enemy => enemy.id !== id);
         this.setState({ enemies: newList });
       });
-
   }
 
   render() {
@@ -52,8 +50,3 @@ class EnemyList extends Component {
 }
 
 export default EnemyList;
-
-
-// localStorage.setItem('activeGame', JSON.stringify(storedConsequences));
-// const arr = JSON.parse(localStorage.getItem(item)) || [];
-// const storedConsequences = JSON.parse(localStorage.getItem('activeGame'));

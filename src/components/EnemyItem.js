@@ -1,14 +1,14 @@
 import React from 'react';
 
-const EnemyItem = props => {
-  if (!props.enemy) {
+const EnemyItem = ({enemy, deleteEnemy}) => {
+  if (!enemy) {
     return <div />;
   }
 
 	return (
     <div>
-      <p>Enemy - {props.enemy.name} - {props.enemy.health}</p>
-      <i className="material-icons add-button" onClick={() => props.deleteEnemy(props.enemy.id)}>delete</i>
+      <p>Enemy - {enemy.name} - {enemy.health}</p>
+      <i className="material-icons add-button" onClick={() => deleteEnemy(enemy.id)}>delete</i>
     </div>
   );
 }
