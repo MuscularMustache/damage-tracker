@@ -8,16 +8,21 @@ class EnemyCreate extends Component {
     this.setState({ enemyName: event.target.value });
   };
 
+  addEnemy = () => {
+    this.setState({ enemyName: '' });
+    this.props.addEnemy(this.state.enemyName);
+  }
+
 	render() {
 		return (
 			<div className="enemy-create">
         <div className={this.state.showField ? 'enemy-input show' : 'enemy-input hide'}>
           <input
             onChange={this.onInputChange}
-            value={this.state.name}
+            value={this.state.enemyName}
             className="standard-input"
           />
-          <button onClick={() => this.props.addEnemy(this.state.enemyName)}>Add Enemy</button>
+          <button onClick={this.addEnemy}>Add Enemy</button>
         </div>
 
 				<i className="material-icons add-button" onClick={() => this.setState({ showField: !this.state.showField })}>add</i>
