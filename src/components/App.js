@@ -1,12 +1,12 @@
 import React from 'react';
 import Header from './Header';
-import EnemyCreate from './EnemyCreate';
+import EnemyList from './EnemyList';
 
 const App = () => {
 	return (
 		<div>
 			<Header />
-			<EnemyCreate />
+			<EnemyList />
 		</div>
 	);
 }
