@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import EnemyCreate from './EnemyCreate';
 import EnemyItem from './EnemyItem';
 import HealthModal from './HealthModal';
+import '../styles/enemylist.scss';
 
 import db from '../db';
 
@@ -41,7 +42,10 @@ class EnemyList extends Component {
   }
 
   clearAllEnemies = id => {
-    // FIGURE OUT HOW TO DO ALL
+    if (!window.confirm("Are you sure you want to delete all of the enemies? This cannot be undone!")) {
+      return;
+    }
+
     db.table('enemies')
       .clear()
       .then(() => {
@@ -69,7 +73,8 @@ class EnemyList extends Component {
   render() {
     const { enemies } = this.state;
     return (
-  		<div>
+  		<div className="enemy-list">
+        <div className="enemy-item-wrap">
   			{enemies.map(enemy => {
           return (
             <EnemyItem
@@ -80,8 +85,9 @@ class EnemyList extends Component {
             />
           );
         })}
+        </div>
   			<EnemyCreate addEnemy={this.addEnemy} />
-        <button onClick={this.clearAllEnemies}>Clear All Enemies</button>
+        <button className="clear-all" onClick={this.clearAllEnemies}>Clear All Enemies</button>
         <HealthModal
           showHealthModal={this.state.showHealthModal}
           toggleHealthModal={this.toggleHealthModal}

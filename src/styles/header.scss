@@ -1,11 +1,12 @@
 @import 'variables';
 
-h2 {
-	font-weight: 100;
-	font-size: 35px;
-	text-align: center;
-	background: $dark-bg;
-	margin: 0;
-	padding: 20px;
-	box-shadow: $shadow;
+header.app-header {
+  h2 {
+  	font-weight: 300;
+  	font-size: 35px;
+  	background: $mid-purple;
+  	margin: 0;
+  	padding: 20px;
+  	box-shadow: $shadow;
+  }
 }

@@ -22,10 +22,15 @@ class EnemyCreate extends Component {
             value={this.state.enemyName}
             className="standard-input"
           />
-          <button onClick={this.addEnemy}>Add Enemy</button>
+          <button onClick={this.addEnemy}>
+            <i className="material-icons add-button" onClick={() => this.setState({ showField: !this.state.showField })}>add</i>
+            <span>
+              Add Enemy
+            </span>
+          </button>
         </div>
 
-				<i className="material-icons add-button" onClick={() => this.setState({ showField: !this.state.showField })}>add</i>
+				<i className="material-icons add-button hide" onClick={() => this.setState({ showField: !this.state.showField })}>add</i>
 			</div>
 		);
 	}

@@ -3,7 +3,7 @@ import '../styles/header.scss';
 
 const Header = () => {
 	return (
-		<header>
+		<header className="app-header">
 			<h2>Damage Tracker</h2>
 		</header>
 	);

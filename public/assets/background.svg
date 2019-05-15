@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="391px" height="720px" viewBox="0 0 391 720" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>Pixel 2 XL</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Pixel-2-XL" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" fill="#A090FF" x="-31" y="-28" width="268" height="432"></rect>
+        <rect id="Rectangle" fill="#6B77E0" x="-12" y="286" width="204" height="482"></rect>
+        <rect id="Rectangle" fill="#C0A5FF" x="192" y="-13" width="264" height="522"></rect>
+        <path d="M192.333657,502 L493,502 L493,752 L-44,752 L-44,738.333657 L192.333657,502 Z" id="Combined-Shape" fill="#50CDFF"></path>
+        <rect id="Rectangle" fill="#9388FF" transform="translate(382.175347, 717.953173) rotate(42.000000) translate(-382.175347, -717.953173) " x="288.675347" y="555.953173" width="187" height="324"></rect>
+        <path d="M403.027345,259 L553.560787,259 L553.560787,502 L192,502 L419.013673,274.986327 L403.027345,259 Z" id="Combined-Shape" fill="#9388FF" opacity="0.705891927"></path>
+        <rect id="Rectangle" fill="#50CDFF" transform="translate(30.462987, 40.462987) rotate(45.000000) translate(-30.462987, -40.462987) " x="-56.5370132" y="-106.537013" width="174" height="294"></rect>
+    </g>
+</svg>

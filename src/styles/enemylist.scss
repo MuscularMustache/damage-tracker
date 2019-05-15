@@ -1,0 +1,17 @@
+@import 'variables';
+
+.enemy-list {
+  .clear-all {
+    background: $darker-purple;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: white;
+    padding: 0 20px;
+    border-radius: 50px;
+    border: none;
+    position: absolute;
+    top: 15px;
+    right: 10px;
+  }
+}

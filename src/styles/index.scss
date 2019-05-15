@@ -1,7 +1,9 @@
 @import 'variables';
 
 body {
-	background: $body-bg;
-	color: $light-grey;
+	color: black;
 	font-family: $font-family;
+  background: url('/assets/background.svg');
+  background-repeat: no-repeat;
+  background-size: 100%;
 }

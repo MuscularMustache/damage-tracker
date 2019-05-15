@@ -1,0 +1,19 @@
+@import 'variables';
+
+.enemy-item-wrap .enemy-item {
+  background: rgba(255,255,255, .4);
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid $mid-purple;
+  p {
+    width: 90%;
+    margin: 0;
+    font-size: 20px;
+    line-height: 50px;
+    text-transform: capitalize;
+  }
+  &:last-child {
+    margin-bottom: 50px;
+  }
+}

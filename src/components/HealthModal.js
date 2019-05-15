@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../styles/healthmodal.scss';
 
 class HealthModal extends Component {
   state = { health: '', symbol: '+' }
@@ -16,6 +17,12 @@ class HealthModal extends Component {
     this.setState({ health: ''});
   }
 
+  toggleHealthModal = () => {
+    this.setState({ health: '' }, () => {
+      this.props.toggleHealthModal()
+    })
+  }
+
   render() {
     if (!this.props.showHealthModal) {
       return <div />
@@ -24,30 +31,34 @@ class HealthModal extends Component {
     const { activeEnemy } = this.props;
 
     return (
-      <div>
-        <h1>{activeEnemy.health} {this.state.symbol} {this.state.health}</h1>
-        HealthModal - active - {activeEnemy.name}
-        <div className="row">
-          <button onClick={() => this.buttonClick(7)}>7</button>
-          <button onClick={() => this.buttonClick(8)}>8</button>
-          <button onClick={() => this.buttonClick(9)}>9</button>
+      <div className="health-modal">
+        <div className="modal-bg" onClick={this.toggleHealthModal}></div>
+        <div className="modal-content">
+          <header>
+            <h3>{activeEnemy.name} </h3>
+            <h2>{activeEnemy.health} {this.state.symbol} {this.state.health}</h2>
+          </header>
+          <div className="row">
+            <button onClick={() => this.buttonClick(7)}>7</button>
+            <button onClick={() => this.buttonClick(8)}>8</button>
+            <button onClick={() => this.buttonClick(9)}>9</button>
+          </div>
+          <div className="row">
+            <button onClick={() => this.buttonClick(4)}>4</button>
+            <button onClick={() => this.buttonClick(5)}>5</button>
+            <button onClick={() => this.buttonClick(6)}>6</button>
+          </div>
+          <div className="row">
+            <button onClick={() => this.buttonClick(1)}>1</button>
+            <button onClick={() => this.buttonClick(2)}>2</button>
+            <button onClick={() => this.buttonClick(3)}>3</button>
+          </div>
+          <div className="row">
+            <button className="heal" onClick={() => this.evaluateHealth('heal')}>Heal</button>
+            <button onClick={() => this.buttonClick(0)}>0</button>
+            <button className="damage" onClick={() => this.evaluateHealth('damage')}>Damage</button>
+          </div>
         </div>
-        <div className="row">
-          <button onClick={() => this.buttonClick(4)}>4</button>
-          <button onClick={() => this.buttonClick(5)}>5</button>
-          <button onClick={() => this.buttonClick(6)}>6</button>
-        </div>
-        <div className="row">
-          <button onClick={() => this.buttonClick(1)}>1</button>
-          <button onClick={() => this.buttonClick(2)}>2</button>
-          <button onClick={() => this.buttonClick(3)}>3</button>
-        </div>
-        <div className="row">
-          <button onClick={() => this.evaluateHealth('heal')}>Heal</button>
-          <button onClick={() => this.buttonClick(0)}>0</button>
-          <button onClick={() => this.evaluateHealth('damage')}>Damage</button>
-        </div>
-
       </div>
     );
   }
