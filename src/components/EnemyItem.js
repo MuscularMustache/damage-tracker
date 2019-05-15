@@ -7,7 +7,7 @@ const EnemyItem = ({enemy, deleteEnemy, toggleHealthModal}) => {
 
 	return (
     <div>
-      <p onClick={() => toggleHealthModal(enemy)}>Enemy - {enemy.name} - {enemy.health}</p>
+      <p onClick={() => toggleHealthModal(enemy)}>{enemy.name} - <strong>{enemy.health}</strong>pts of damage</p>
       <i className="material-icons add-button" onClick={() => deleteEnemy(enemy.id)}>delete</i>
     </div>
   );

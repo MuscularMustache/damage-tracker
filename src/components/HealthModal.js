@@ -7,9 +7,11 @@ class HealthModal extends Component {
     this.setState({ health: `${this.state.health}${num}` });
   }
 
-  evaluateHealth = () => {
+  evaluateHealth = (type) => {
     const { activeEnemy } = this.props;
-    const health = parseInt(this.state.health) + parseInt(activeEnemy.health);
+    const stateHealth = parseInt(this.state.health);
+    const activeHealth = parseInt(activeEnemy.health);
+    const health =  type === 'heal' ? activeHealth - stateHealth : activeHealth + stateHealth;
     this.props.evaluateHealth(activeEnemy.id, health);
     this.setState({ health: ''});
   }
@@ -40,7 +42,12 @@ class HealthModal extends Component {
           <button onClick={() => this.buttonClick(2)}>2</button>
           <button onClick={() => this.buttonClick(3)}>3</button>
         </div>
-        <button onClick={this.evaluateHealth}>=</button>
+        <div className="row">
+          <button onClick={() => this.evaluateHealth('heal')}>Heal</button>
+          <button onClick={() => this.buttonClick(0)}>0</button>
+          <button onClick={() => this.evaluateHealth('damage')}>Damage</button>
+        </div>
+
       </div>
     );
   }

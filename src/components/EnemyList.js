@@ -50,8 +50,6 @@ class EnemyList extends Component {
   }
 
   evaluateHealth = (id, health) => {
-    console.log(id);
-    console.log(health);
     db.table('enemies')
       .update(id, { health })
       .then(() => {
