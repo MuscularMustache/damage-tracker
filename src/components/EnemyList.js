@@ -7,7 +7,7 @@ import db from '../db';
 
 
 class EnemyList extends Component {
-  state = { enemies: [], showHealthModal: false }
+  state = { enemies: [], showHealthModal: false, activeEnemy: {} }
 
   componentDidMount() {
     db.table('enemies')
@@ -49,12 +49,23 @@ class EnemyList extends Component {
       });
   }
 
-  // editEnemyHealth = id => {
-  //   console.log();
-  // }
+  evaluateHealth = (id, health) => {
+    console.log(id);
+    console.log(health);
+    db.table('enemies')
+      .update(id, { health })
+      .then(() => {
+        const enemyToUpdate = this.state.enemies.find(enemy => enemy.id === id);
+        const newList = [
+          ...this.state.enemies.filter(enemy => enemy.id !== id),
+          Object.assign({}, enemyToUpdate, { health })
+        ];
+        this.setState({ enemies: newList, showHealthModal: !this.state.showHealthModal });
+      });
+  }
 
-  toggleHealthModal = () => {
-    this.setState({ showHealthModal: !this.state.showHealthModal });
+  toggleHealthModal = enemy => {
+    this.setState({ showHealthModal: !this.state.showHealthModal, activeEnemy: enemy || {} });
   }
 
   render() {
@@ -73,7 +84,12 @@ class EnemyList extends Component {
         })}
   			<EnemyCreate addEnemy={this.addEnemy} />
         <button onClick={this.clearAllEnemies}>Clear All Enemies</button>
-        <HealthModal showHealthModal={this.state.showHealthModal} toggleHealthModal={this.toggleHealthModal} />
+        <HealthModal
+          showHealthModal={this.state.showHealthModal}
+          toggleHealthModal={this.toggleHealthModal}
+          activeEnemy={this.state.activeEnemy}
+          evaluateHealth={this.evaluateHealth}
+        />
   		</div>
   	);
   }
