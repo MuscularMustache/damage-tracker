@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import EnemyCreate from './EnemyCreate';
 import EnemyItem from './EnemyItem';
+import HealthModal from './HealthModal';
+
 import db from '../db';
 
 
 class EnemyList extends Component {
-  state = { enemies: [] }
+  state = { enemies: [], showHealthModal: false }
 
   componentDidMount() {
     db.table('enemies')
@@ -38,12 +40,40 @@ class EnemyList extends Component {
       });
   }
 
+  clearAllEnemies = id => {
+    // FIGURE OUT HOW TO DO ALL
+    db.table('enemies')
+      .clear()
+      .then(() => {
+        this.setState({ enemies: [] });
+      });
+  }
+
+  // editEnemyHealth = id => {
+  //   console.log();
+  // }
+
+  toggleHealthModal = () => {
+    this.setState({ showHealthModal: !this.state.showHealthModal });
+  }
+
   render() {
     const { enemies } = this.state;
     return (
   		<div>
-  			{enemies.map(enemy => <EnemyItem key={enemy.id} enemy={enemy} deleteEnemy={this.deleteEnemy} />)}
+  			{enemies.map(enemy => {
+          return (
+            <EnemyItem
+              key={enemy.id}
+              enemy={enemy}
+              deleteEnemy={this.deleteEnemy}
+              toggleHealthModal={this.toggleHealthModal}
+            />
+          );
+        })}
   			<EnemyCreate addEnemy={this.addEnemy} />
+        <button onClick={this.clearAllEnemies}>Clear All Enemies</button>
+        <HealthModal showHealthModal={this.state.showHealthModal} toggleHealthModal={this.toggleHealthModal} />
   		</div>
   	);
   }
