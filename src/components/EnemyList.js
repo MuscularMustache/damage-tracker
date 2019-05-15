@@ -57,11 +57,17 @@ class EnemyList extends Component {
     db.table('enemies')
       .update(id, { health })
       .then(() => {
+        let index;
         const enemyToUpdate = this.state.enemies.find(enemy => enemy.id === id);
         const newList = [
-          ...this.state.enemies.filter(enemy => enemy.id !== id),
-          Object.assign({}, enemyToUpdate, { health })
+          ...this.state.enemies.filter((enemy, idx) => {
+            if (enemy.id === id) {
+              index = idx;
+            }
+            return enemy.id !== id;
+          })
         ];
+        newList.splice(index, 0, Object.assign({}, enemyToUpdate, { health }))
         this.setState({ enemies: newList, showHealthModal: !this.state.showHealthModal });
       });
   }
