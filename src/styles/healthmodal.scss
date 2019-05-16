@@ -29,6 +29,7 @@
     background: $dark-bg;
     box-shadow: $shadow;
     header {
+      position: relative;
       h3 {
         text-transform: capitalize;
         margin: 0;
@@ -36,6 +37,11 @@
       h2 {
         margin: 10px 0;
         font-size: 30px;
+      }
+      .add-button {
+        position: absolute;
+        top: 10px;
+        right: 0px;
       }
     }
     .row {

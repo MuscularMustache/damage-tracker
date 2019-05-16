@@ -23,6 +23,11 @@ class HealthModal extends Component {
     })
   }
 
+  deleteChar = () => {
+    let health = this.state.health;
+    this.setState({ health: health.substr(0, health.length-1)});
+  }
+
   render() {
     if (!this.props.showHealthModal) {
       return <div />
@@ -37,6 +42,7 @@ class HealthModal extends Component {
           <header>
             <h3>{activeEnemy.name} </h3>
             <h2>{activeEnemy.health} {this.state.symbol} {this.state.health}</h2>
+            <i className="material-icons add-button" onClick={this.deleteChar}>backspace</i>
           </header>
           <div className="row">
             <button onClick={() => this.buttonClick(7)}>7</button>
