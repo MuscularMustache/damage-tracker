@@ -60,9 +60,9 @@ class HealthModal extends Component {
             <button onClick={() => this.buttonClick(3)}>3</button>
           </div>
           <div className="row">
-            <button className="heal" onClick={() => this.evaluateHealth('heal')}>Heal</button>
+            <button className="heal" disabled={(this.state.health.length <= 0)} onClick={() => this.evaluateHealth('heal')}>Heal</button>
             <button onClick={() => this.buttonClick(0)}>0</button>
-            <button className="damage" onClick={() => this.evaluateHealth('damage')}>Damage</button>
+            <button className="damage" disabled={(this.state.health.length <= 0)} onClick={() => this.evaluateHealth('damage')}>Damage</button>
           </div>
         </div>
       </div>
