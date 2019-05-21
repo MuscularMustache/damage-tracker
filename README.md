@@ -1,3 +1,9 @@
+## Damage Tracker
+Damage tracker to be used on mobile devices to help my D&D group keep track of damage they've dealt against enemies
+
+
+
+---
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
