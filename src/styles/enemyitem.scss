@@ -6,6 +6,14 @@
   display: flex;
   justify-content: space-between;
   border-top: 1px solid $mid-purple;
+  &.dead {
+    opacity: .7;
+    p {
+      pointer-events: none;
+      text-decoration: line-through;
+      color: $red;
+    }
+  }
   p {
     width: 90%;
     margin: 0;
@@ -15,5 +23,9 @@
   }
   &:last-child {
     margin-bottom: 50px;
+  }
+  .add-button.death {
+    margin-right: 15px;
+    background-color: $red;
   }
 }

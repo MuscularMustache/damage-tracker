@@ -7,3 +7,10 @@ body {
   background-repeat: no-repeat;
   background-size: 100%;
 }
+
+i, .unselect {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

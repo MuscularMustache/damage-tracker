@@ -41,6 +41,31 @@ class EnemyList extends Component {
       });
   }
 
+  toggleDeath = (id, alive) => {
+    db.table('enemies')
+      .update(id, { alive })
+      .then(() => {
+        let index;
+        const enemyToUpdate = this.state.enemies.find(enemy => enemy.id === id);
+        const enemyObj = Object.assign({}, enemyToUpdate, { alive });
+        const newList = [
+          ...this.state.enemies.filter((enemy, idx) => {
+            if (enemy.id === id) { index = idx; }
+            return enemy.id !== id;
+          })
+        ];
+        if (alive) {
+          newList.splice(index, 0, enemyObj)
+        } else {
+          newList.push(enemyObj)
+        }
+        this.setState({ enemies: newList });
+      });
+
+    console.log('here');
+  }
+
+
   clearAllEnemies = id => {
     if (!window.confirm("Are you sure you want to delete all of the enemies? This cannot be undone!")) {
       return;
@@ -87,6 +112,7 @@ class EnemyList extends Component {
               key={enemy.id}
               enemy={enemy}
               deleteEnemy={this.deleteEnemy}
+              toggleDeath={this.toggleDeath}
               toggleHealthModal={this.toggleHealthModal}
             />
           );
