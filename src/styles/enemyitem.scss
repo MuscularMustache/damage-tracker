@@ -1,7 +1,9 @@
 @import 'variables';
 
 .enemy-item-wrap {
-  max-height: calc(100vh - 230px);
+  position: absolute;
+  top: 80px;
+  bottom: 90px;
   overflow: scroll;
   .enemy-item {
     background: rgba(255,255,255, .4);
