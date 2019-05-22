@@ -1,6 +1,7 @@
 @import 'variables';
 
 body {
+  overflow: hidden;
 	color: black;
 	font-family: $font-family;
   background: url('/assets/background.svg');
