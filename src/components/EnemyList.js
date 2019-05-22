@@ -119,7 +119,7 @@ class EnemyList extends Component {
         })}
         </div>
   			<EnemyCreate addEnemy={this.addEnemy} />
-        <button className="clear-all" onClick={this.clearAllEnemies}>Clear All Enemies</button>
+        <button className="clear-all" onClick={this.clearAllEnemies}>Clear All</button>
         <HealthModal
           showHealthModal={this.state.showHealthModal}
           toggleHealthModal={this.toggleHealthModal}
