@@ -1,16 +1,15 @@
 import React from 'react';
 import '../styles/enemyitem.scss';
 
-const EnemyItem = ({enemy, deleteEnemy, toggleDeath, toggleHealthModal}) => {
+const EnemyItem = ({enemy, toggleModal}) => {
   if (!enemy) {
     return <div />;
   }
 
 	return (
     <div className={enemy.alive ? 'enemy-item' : 'enemy-item dead'}>
-      <p onClick={() => toggleHealthModal(enemy, 'healthModal')} className="unselect">{enemy.name} - <strong>{enemy.health}</strong>pts of damage</p>
-      <i className="material-icons add-button death" onClick={() => toggleDeath(enemy.id, !enemy.alive)}>thumb_down</i>
-      <i className="material-icons add-button" onClick={() => deleteEnemy(enemy.id)}>delete</i>
+      <p onClick={() => toggleModal(enemy, 'healthModal')} className="unselect">{enemy.name} - <strong>{enemy.health}</strong>pts of damage</p>
+      <i className="material-icons add-button" onClick={() => toggleModal(enemy, 'optionModal')}>more_vert</i>
     </div>
   );
 }

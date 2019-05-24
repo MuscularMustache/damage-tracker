@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import EnemyCreate from './EnemyCreate';
 import EnemyItem from './EnemyItem';
 import HealthModal from './HealthModal';
+import OptionModal from './OptionModal';
 import '../styles/enemylist.scss';
 
 import db from '../db';
@@ -38,7 +39,7 @@ class EnemyList extends Component {
       .delete(id)
       .then(() => {
         const newList = this.state.enemies.filter(enemy => enemy.id !== id);
-        this.setState({ enemies: newList });
+        this.setState({ enemies: newList, modalShown: false });
       });
   }
 
@@ -60,7 +61,7 @@ class EnemyList extends Component {
         } else {
           newList.push(enemyObj)
         }
-        this.setState({ enemies: newList });
+        this.setState({ enemies: newList, modalShown: false });
       });
   }
 
@@ -91,12 +92,12 @@ class EnemyList extends Component {
           })
         ];
         newList.splice(index, 0, Object.assign({}, enemyToUpdate, { health, healthHistory }))
-        this.setState({ enemies: newList, modalShown: !this.state.modalShown });
+        this.setState({ enemies: newList, modalShown: false });
       });
   }
 
   toggleModal = (enemy, modalName) => {
-    this.setState({ modalShown: !this.state.modalShown, modalActive: modalName, activeEnemy: enemy || {} });
+    this.setState({ modalShown: !this.state.modalShown, modalActive: modalName || '', activeEnemy: enemy || {} });
   }
 
   render() {
@@ -109,9 +110,7 @@ class EnemyList extends Component {
             <EnemyItem
               key={enemy.id}
               enemy={enemy}
-              deleteEnemy={this.deleteEnemy}
-              toggleDeath={this.toggleDeath}
-              toggleHealthModal={this.toggleModal}
+              toggleModal={this.toggleModal}
             />
           );
         })}
@@ -119,10 +118,17 @@ class EnemyList extends Component {
   			<EnemyCreate addEnemy={this.addEnemy} />
         <button className="clear-all" onClick={this.clearAllEnemies}>Clear All</button>
         <HealthModal
-          modalState={{show: this.state.modalShown, activeModal: this.state.modalActive, name: 'healthModal'}}
-          toggleHealthModal={this.toggleModal}
+          modalState={{show: this.state.modalShown, activeModal: this.state.modalActive, modalName: 'healthModal'}}
+          toggleModal={this.toggleModal}
           activeEnemy={this.state.activeEnemy}
           evaluateHealth={this.evaluateHealth}
+        />
+        <OptionModal
+          modalState={{show: this.state.modalShown, activeModal: this.state.modalActive, modalName: 'optionModal'}}
+          toggleModal={this.toggleModal}
+          activeEnemy={this.state.activeEnemy}
+          deleteEnemy={this.deleteEnemy}
+          toggleDeath={this.toggleDeath}
         />
   		</div>
   	);

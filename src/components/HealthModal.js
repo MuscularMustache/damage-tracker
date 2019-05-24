@@ -21,9 +21,9 @@ class HealthModal extends Component {
     this.setState({ health: ''});
   }
 
-  toggleHealthModal = () => {
+  toggleModal = () => {
     this.setState({ health: '' }, () => {
-      this.props.toggleHealthModal()
+      this.props.toggleModal();
     })
   }
 
@@ -33,15 +33,15 @@ class HealthModal extends Component {
   }
 
   render() {
-    const {show, activeModal, name} = this.props.modalState;
-    if (!show || activeModal !== name) {
+    const {show, activeModal, modalName} = this.props.modalState;
+    if (!show || activeModal !== modalName) {
       return <div />
     }
 
     const { activeEnemy } = this.props;
 
     return (
-        <Modal toggleModal={this.toggleHealthModal} class="health-modal">
+        <Modal toggleModal={this.toggleModal} class="health-modal">
           <header>
             <h3>{activeEnemy.name} </h3>
             <h2>{activeEnemy.health} {this.state.symbol} {this.state.health}</h2>
