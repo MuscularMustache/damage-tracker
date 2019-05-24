@@ -1,70 +1,42 @@
 @import 'variables';
 
-.health-modal {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 999;
-  .modal-bg {
-    width: 100%;
-    height: 100%;
-    background: $dark-bg;
-    opacity: .5;
-    position: absolute;
-    z-index: -1;
-  }
-  .modal-content {
-    color: $light-grey;
-    box-sizing: border-box;
-    padding: 20px;
-    width: 300px;
-    height: 460px;
-    position: absolute;
-    top: calc(50% - 230px);
-    left: calc(50% - 150px);
-    background: $dark-bg;
-    box-shadow: $shadow;
-    header {
-      position: relative;
-      h3 {
-        text-transform: capitalize;
-        margin: 0;
-      }
-      h2 {
-        margin: 10px 0;
-        font-size: 30px;
-      }
-      .add-button {
-        position: absolute;
-        top: 10px;
-        right: 0px;
-      }
+.health-modal {  
+  header {
+    position: relative;
+    h3 {
+      text-transform: capitalize;
+      margin: 0;
     }
-    .row {
-      display: flex;
-      margin-bottom: 10px;
-      > * {
-        width: 100%;
-        margin-right: 10px;
-        background: white;
-        border: none;
-        padding: 30px 0;
-        border-radius: 50%;
-        outline: none;
+    h2 {
+      margin: 10px 0;
+      font-size: 30px;
+    }
+    .add-button {
+      position: absolute;
+      top: 10px;
+      right: 0px;
+    }
+  }
+  .row {
+    display: flex;
+    margin-bottom: 10px;
+    > * {
+      width: 100%;
+      margin-right: 10px;
+      background: white;
+      border: none;
+      padding: 30px 0;
+      border-radius: 50%;
+      outline: none;
 
-        &:last-child {
-          margin-right: 0;
-        }
-        &.heal {
-          background: $green;
-        }
-        &.damage {
-          background: $red;
-        }
+      &:last-child {
+        margin-right: 0;
+      }
+      &.heal {
+        background: $green;
+      }
+      &.damage {
+        background: $red;
       }
     }
   }

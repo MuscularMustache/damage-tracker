@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Modal from './Modal';
 import '../styles/healthmodal.scss';
 
 class HealthModal extends Component {
@@ -8,7 +9,7 @@ class HealthModal extends Component {
     this.setState({ health: `${this.state.health}${num}` });
   }
 
-  evaluateHealth = (type) => {
+  evaluateHealth = type => {
     const { activeEnemy } = this.props;
     const stateHealth = parseInt(this.state.health);
     const activeHealth = parseInt(activeEnemy.health);
@@ -39,9 +40,7 @@ class HealthModal extends Component {
     const { activeEnemy } = this.props;
 
     return (
-      <div className="health-modal">
-        <div className="modal-bg" onClick={this.toggleHealthModal}></div>
-        <div className="modal-content">
+        <Modal toggleModal={this.toggleHealthModal} class="health-modal">
           <header>
             <h3>{activeEnemy.name} </h3>
             <h2>{activeEnemy.health} {this.state.symbol} {this.state.health}</h2>
@@ -67,8 +66,7 @@ class HealthModal extends Component {
             <button onClick={() => this.buttonClick(0)}>0</button>
             <button className="damage" disabled={(this.state.health.length <= 0)} onClick={() => this.evaluateHealth('damage')}>Damage</button>
           </div>
-        </div>
-      </div>
+        </Modal>
     );
   }
 }
