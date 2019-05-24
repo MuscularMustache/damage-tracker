@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from './Modal';
-// import '../styles/optionmodal.scss';
+import '../styles/optionmodal.scss';
 
 const OptionModal = props => {
   const {show, activeModal, modalName} = props.modalState;
@@ -10,24 +10,45 @@ const OptionModal = props => {
 
   const { activeEnemy, activeEnemy: { name, health, healthHistory} } = props;
 
-  const history = healthHistory.map((health, index) => {
-    return <span key={activeEnemy.id-index}> {health}</span>
-  })
+  const history = () => {
+    if (healthHistory.length) {
+      return (
+        <p>
+          <span>0</span>
+          {healthHistory.map((health, index) => {
+            return <span key={activeEnemy.id-index}> {health}</span>
+          })}
+        </p>
+      );
+    } else {
+      return <p>This boii aint even got hit yet</p>;
+    }
+  }
 
   return (
     <Modal class="option-modal" toggleModal={props.toggleModal}>
+      <h2>{name}</h2>
+      <h3>has taken {health} damage</h3>
       <div>
-        <h3>Option Modal</h3>
-        <h3>{name} has taken {health} damage</h3>
-        <i className="material-icons icon-button death" onClick={() => props.toggleDeath(activeEnemy.id, !activeEnemy.alive)}>thumb_down</i>
-        <i className="material-icons icon-button" onClick={() => props.deleteEnemy(activeEnemy.id)}>delete</i>
-        <p>
-          <span>0</span>
-          {history}
-        </p>
+        <strong>Health History</strong>
+        {history()}
+      </div>
+      <div className="buttons">
+        <button
+          className={activeEnemy.alive ? 'icon-text-button alive' : 'icon-text-button dead'}
+          onClick={() => props.toggleDeath(activeEnemy.id, !activeEnemy.alive)}
+          >
+          <i className="material-icons icon-button">{activeEnemy.alive ? 'thumb_down' : 'thumb_up'}</i>
+          <span>{activeEnemy.alive ? 'Oh you know he dead now' : 'HAZZAH! I\'m back!'}</span>
+        </button>
+        <button className="icon-text-button" onClick={() => props.deleteEnemy(activeEnemy.id)}>
+          <i className="material-icons icon-button">delete</i>
+          <span>Erase me from existance!</span>
+        </button>
       </div>
     </Modal>
   );
 }
+
 
 export default OptionModal;

@@ -16,13 +16,13 @@ class EnemyCreate extends Component {
 	render() {
 		return (
 			<div className="enemy-create">
-        <div className='enemy-input'>
+        <div className="enemy-input">
           <input
             onChange={this.onInputChange}
             value={this.state.enemyName}
             className="standard-input"
           />
-          <button onClick={this.addEnemy}>
+          <button className="icon-text-button" onClick={this.addEnemy}>
             <i className="material-icons icon-button">add</i>
             <span>
               Add Enemy

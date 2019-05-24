@@ -1,0 +1,42 @@
+@import 'variables';
+
+.option-modal {
+  h2 {
+    font-weight: 300;
+    text-transform: capitalize;
+    margin: 0;
+    font-size: 27px;
+  }
+  h3 {
+    font-weight: 300;
+    margin-top: 5px;
+    font-size: 22px;
+  }
+  p {
+    margin-top: 5px;
+  }
+  h2, h3, p, strong {
+    margin-left: 10px;
+  }
+  .buttons {
+    margin-top: 40px;
+    .icon-text-button {
+      width: 100%;
+      &:last-of-type {
+        margin-top: 20px;
+      }
+      &.alive {
+        background: $red;
+        .icon-button {
+          background: lighten( $red, 10% );
+        }
+      }
+      &.dead {
+        background: $green;
+        .icon-button {
+          background: lighten( $green, 10% );
+        }
+      }
+    }
+  }
+}

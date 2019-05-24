@@ -18,29 +18,13 @@
       outline: none;
       padding: 0 20px;
     }
-    button {
-      display: flex;
-      border-radius: 50px;
-      padding: 0;
-      border: 0;
-      background: $darker-purple;
-      box-shadow: $shadow;
-      outline: none;
-      min-width: 160px;
-      span {
-        width: 100%;
-        line-height: 50px;
-        color: white;
-        margin-right: 10px;
-      }
-    }
   }
 }
 
 @media screen and (max-width: 430px) {
   .enemy-create {
     .enemy-input {
-      button {
+      .icon-text-button {
         min-width: 50px;
         max-width: 50px;
         span {
