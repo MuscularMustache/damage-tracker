@@ -33,7 +33,8 @@ class HealthModal extends Component {
   }
 
   render() {
-    if (!this.props.showHealthModal) {
+    const {show, activeModal, name} = this.props.modalState;
+    if (!show || activeModal !== name) {
       return <div />
     }
 

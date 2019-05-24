@@ -8,7 +8,7 @@ import db from '../db';
 
 
 class EnemyList extends Component {
-  state = { enemies: [], showHealthModal: false, activeEnemy: {} }
+  state = { enemies: [], modalShown: false, modalActive: '', activeEnemy: {} }
 
   componentDidMount() {
     db.table('enemies')
@@ -64,7 +64,6 @@ class EnemyList extends Component {
       });
   }
 
-
   clearAllEnemies = id => {
     if (!window.confirm("Are you sure you want to delete all of the enemies? This cannot be undone!")) {
       return;
@@ -92,12 +91,12 @@ class EnemyList extends Component {
           })
         ];
         newList.splice(index, 0, Object.assign({}, enemyToUpdate, { health, healthHistory }))
-        this.setState({ enemies: newList, showHealthModal: !this.state.showHealthModal });
+        this.setState({ enemies: newList, modalShown: !this.state.modalShown });
       });
   }
 
-  toggleHealthModal = enemy => {
-    this.setState({ showHealthModal: !this.state.showHealthModal, activeEnemy: enemy || {} });
+  toggleModal = (enemy, modalName) => {
+    this.setState({ modalShown: !this.state.modalShown, modalActive: modalName, activeEnemy: enemy || {} });
   }
 
   render() {
@@ -112,7 +111,7 @@ class EnemyList extends Component {
               enemy={enemy}
               deleteEnemy={this.deleteEnemy}
               toggleDeath={this.toggleDeath}
-              toggleHealthModal={this.toggleHealthModal}
+              toggleHealthModal={this.toggleModal}
             />
           );
         })}
@@ -120,8 +119,8 @@ class EnemyList extends Component {
   			<EnemyCreate addEnemy={this.addEnemy} />
         <button className="clear-all" onClick={this.clearAllEnemies}>Clear All</button>
         <HealthModal
-          showHealthModal={this.state.showHealthModal}
-          toggleHealthModal={this.toggleHealthModal}
+          modalState={{show: this.state.modalShown, activeModal: this.state.modalActive, name: 'healthModal'}}
+          toggleHealthModal={this.toggleModal}
           activeEnemy={this.state.activeEnemy}
           evaluateHealth={this.evaluateHealth}
         />
