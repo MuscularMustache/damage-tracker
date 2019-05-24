@@ -19,8 +19,8 @@ const OptionModal = props => {
       <div>
         <h3>Option Modal</h3>
         <h3>{name} has taken {health} damage</h3>
-        <i className="material-icons add-button death" onClick={() => props.toggleDeath(activeEnemy.id, !activeEnemy.alive)}>thumb_down</i>
-        <i className="material-icons add-button" onClick={() => props.deleteEnemy(activeEnemy.id)}>delete</i>
+        <i className="material-icons icon-button death" onClick={() => props.toggleDeath(activeEnemy.id, !activeEnemy.alive)}>thumb_down</i>
+        <i className="material-icons icon-button" onClick={() => props.deleteEnemy(activeEnemy.id)}>delete</i>
         <p>
           <span>0</span>
           {history}
