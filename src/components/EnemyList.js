@@ -22,7 +22,8 @@ class EnemyList extends Component {
     const enemy = {
       name,
       health: 0,
-      alive: true
+      alive: true,
+      healthHistory: []
     };
     db.table('enemies')
       .add(enemy)
@@ -61,8 +62,6 @@ class EnemyList extends Component {
         }
         this.setState({ enemies: newList });
       });
-
-    console.log('here');
   }
 
 
@@ -78,9 +77,9 @@ class EnemyList extends Component {
       });
   }
 
-  evaluateHealth = (id, health) => {
+  evaluateHealth = (id, health, healthHistory) => {
     db.table('enemies')
-      .update(id, { health })
+      .update(id, { health, healthHistory })
       .then(() => {
         let index;
         const enemyToUpdate = this.state.enemies.find(enemy => enemy.id === id);
@@ -92,7 +91,7 @@ class EnemyList extends Component {
             return enemy.id !== id;
           })
         ];
-        newList.splice(index, 0, Object.assign({}, enemyToUpdate, { health }))
+        newList.splice(index, 0, Object.assign({}, enemyToUpdate, { health, healthHistory }))
         this.setState({ enemies: newList, showHealthModal: !this.state.showHealthModal });
       });
   }

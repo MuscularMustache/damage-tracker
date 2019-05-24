@@ -12,8 +12,11 @@ class HealthModal extends Component {
     const { activeEnemy } = this.props;
     const stateHealth = parseInt(this.state.health);
     const activeHealth = parseInt(activeEnemy.health);
-    const health =  type === 'heal' ? activeHealth - stateHealth : activeHealth + stateHealth;
-    this.props.evaluateHealth(activeEnemy.id, health);
+    const health = type === 'heal' ? activeHealth - stateHealth : activeHealth + stateHealth;
+    const appendedHealth = type === 'heal' ? `- ${this.state.health}` : `+ ${this.state.health}`;
+    const healthHistory = [...activeEnemy.healthHistory, appendedHealth];
+
+    this.props.evaluateHealth(activeEnemy.id, health, healthHistory);
     this.setState({ health: ''});
   }
 
