@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Modal from './Modal';
 import '../styles/healthmodal.scss';
 
 class HealthModal extends Component {
@@ -8,7 +9,7 @@ class HealthModal extends Component {
     this.setState({ health: `${this.state.health}${num}` });
   }
 
-  evaluateHealth = (type) => {
+  evaluateHealth = type => {
     const { activeEnemy } = this.props;
     const stateHealth = parseInt(this.state.health);
     const activeHealth = parseInt(activeEnemy.health);
@@ -20,9 +21,9 @@ class HealthModal extends Component {
     this.setState({ health: ''});
   }
 
-  toggleHealthModal = () => {
+  toggleModal = () => {
     this.setState({ health: '' }, () => {
-      this.props.toggleHealthModal()
+      this.props.toggleModal();
     })
   }
 
@@ -32,20 +33,19 @@ class HealthModal extends Component {
   }
 
   render() {
-    if (!this.props.showHealthModal) {
+    const {show, activeModal, modalName} = this.props.modalState;
+    if (!show || activeModal !== modalName) {
       return <div />
     }
 
     const { activeEnemy } = this.props;
 
     return (
-      <div className="health-modal">
-        <div className="modal-bg" onClick={this.toggleHealthModal}></div>
-        <div className="modal-content">
+        <Modal toggleModal={this.toggleModal} class="health-modal">
           <header>
             <h3>{activeEnemy.name} </h3>
             <h2>{activeEnemy.health} {this.state.symbol} {this.state.health}</h2>
-            <i className="material-icons add-button" onClick={this.deleteChar}>backspace</i>
+            <i className="material-icons icon-button" onClick={this.deleteChar}>backspace</i>
           </header>
           <div className="row">
             <button onClick={() => this.buttonClick(7)}>7</button>
@@ -67,8 +67,7 @@ class HealthModal extends Component {
             <button onClick={() => this.buttonClick(0)}>0</button>
             <button className="damage" disabled={(this.state.health.length <= 0)} onClick={() => this.evaluateHealth('damage')}>Damage</button>
           </div>
-        </div>
-      </div>
+        </Modal>
     );
   }
 }

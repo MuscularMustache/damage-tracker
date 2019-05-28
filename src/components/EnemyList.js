@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import EnemyCreate from './EnemyCreate';
 import EnemyItem from './EnemyItem';
 import HealthModal from './HealthModal';
+import OptionModal from './OptionModal';
 import '../styles/enemylist.scss';
 
 import db from '../db';
 
 
 class EnemyList extends Component {
-  state = { enemies: [], showHealthModal: false, activeEnemy: {} }
+  state = { enemies: [], modalShown: false, modalActive: '', activeEnemy: {} }
 
   componentDidMount() {
     db.table('enemies')
@@ -38,7 +39,7 @@ class EnemyList extends Component {
       .delete(id)
       .then(() => {
         const newList = this.state.enemies.filter(enemy => enemy.id !== id);
-        this.setState({ enemies: newList });
+        this.setState({ enemies: newList, modalShown: false });
       });
   }
 
@@ -60,10 +61,9 @@ class EnemyList extends Component {
         } else {
           newList.push(enemyObj)
         }
-        this.setState({ enemies: newList });
+        this.setState({ enemies: newList, modalShown: false });
       });
   }
-
 
   clearAllEnemies = id => {
     if (!window.confirm("Are you sure you want to delete all of the enemies? This cannot be undone!")) {
@@ -92,12 +92,12 @@ class EnemyList extends Component {
           })
         ];
         newList.splice(index, 0, Object.assign({}, enemyToUpdate, { health, healthHistory }))
-        this.setState({ enemies: newList, showHealthModal: !this.state.showHealthModal });
+        this.setState({ enemies: newList, modalShown: false });
       });
   }
 
-  toggleHealthModal = enemy => {
-    this.setState({ showHealthModal: !this.state.showHealthModal, activeEnemy: enemy || {} });
+  toggleModal = (enemy, modalName) => {
+    this.setState({ modalShown: !this.state.modalShown, modalActive: modalName || '', activeEnemy: enemy || {} });
   }
 
   render() {
@@ -110,9 +110,7 @@ class EnemyList extends Component {
             <EnemyItem
               key={enemy.id}
               enemy={enemy}
-              deleteEnemy={this.deleteEnemy}
-              toggleDeath={this.toggleDeath}
-              toggleHealthModal={this.toggleHealthModal}
+              toggleModal={this.toggleModal}
             />
           );
         })}
@@ -120,10 +118,17 @@ class EnemyList extends Component {
   			<EnemyCreate addEnemy={this.addEnemy} />
         <button className="clear-all" onClick={this.clearAllEnemies}>Clear All</button>
         <HealthModal
-          showHealthModal={this.state.showHealthModal}
-          toggleHealthModal={this.toggleHealthModal}
+          modalState={{show: this.state.modalShown, activeModal: this.state.modalActive, modalName: 'healthModal'}}
+          toggleModal={this.toggleModal}
           activeEnemy={this.state.activeEnemy}
           evaluateHealth={this.evaluateHealth}
+        />
+        <OptionModal
+          modalState={{show: this.state.modalShown, activeModal: this.state.modalActive, modalName: 'optionModal'}}
+          toggleModal={this.toggleModal}
+          activeEnemy={this.state.activeEnemy}
+          deleteEnemy={this.deleteEnemy}
+          toggleDeath={this.toggleDeath}
         />
   		</div>
   	);
