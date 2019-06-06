@@ -12,8 +12,14 @@
     margin-top: 5px;
     font-size: 22px;
   }
-  p {
+  .health-history {
     margin-top: 5px;
+    .damage {
+      color: $red;
+    }
+    .healed {
+      color: $green;
+    }
   }
   h2, h3, p, strong {
     margin-left: 10px;

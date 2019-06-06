@@ -13,10 +13,11 @@ const OptionModal = props => {
   const history = () => {
     if (healthHistory.length) {
       return (
-        <p>
+        <p className="health-history">
           <span>0</span>
           {healthHistory.map((health, index) => {
-            return <span key={activeEnemy.id-index}> {health}</span>
+            let damage = health.includes('+');
+            return <span key={activeEnemy.id-index} className={damage ? 'damage' : 'healed'}> {health}</span>
           })}
         </p>
       );
