@@ -8,5 +8,9 @@ header.app-header {
   	margin: 0;
   	padding: 20px;
   	box-shadow: $shadow;
+    a {
+      color: black;
+      text-decoration: none;
+    }
   }
 }
