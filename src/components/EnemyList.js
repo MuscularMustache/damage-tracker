@@ -12,7 +12,7 @@ class EnemyList extends Component {
   state = { enemies: [], modalShown: false, modalActive: '', activeEnemy: {} }
 
   componentDidMount() {
-    db.table('enemies')
+    db.table(this.props.enemyTableName)
       .toArray()
       .then((enemies) => {
         this.setState({ enemies });
@@ -26,7 +26,7 @@ class EnemyList extends Component {
       alive: true,
       healthHistory: []
     };
-    db.table('enemies')
+    db.table(this.props.enemyTableName)
       .add(enemy)
       .then((id) => {
         const newList = [...this.state.enemies, Object.assign({}, enemy, { id })];
@@ -35,7 +35,7 @@ class EnemyList extends Component {
   };
 
   deleteEnemy = id => {
-    db.table('enemies')
+    db.table(this.props.enemyTableName)
       .delete(id)
       .then(() => {
         const newList = this.state.enemies.filter(enemy => enemy.id !== id);
@@ -44,7 +44,7 @@ class EnemyList extends Component {
   }
 
   toggleDeath = (id, alive) => {
-    db.table('enemies')
+    db.table(this.props.enemyTableName)
       .update(id, { alive })
       .then(() => {
         let index;
@@ -70,7 +70,7 @@ class EnemyList extends Component {
       return;
     }
 
-    db.table('enemies')
+    db.table(this.props.enemyTableName)
       .clear()
       .then(() => {
         this.setState({ enemies: [] });
@@ -78,7 +78,7 @@ class EnemyList extends Component {
   }
 
   evaluateHealth = (id, health, healthHistory) => {
-    db.table('enemies')
+    db.table(this.props.enemyTableName)
       .update(id, { health, healthHistory })
       .then(() => {
         let index;
@@ -105,6 +105,7 @@ class EnemyList extends Component {
     return (
   		<div className="enemy-list">
         <div className="enemy-item-wrap">
+        <h2>PLAYER PAGE</h2>
   			{enemies.map(enemy => {
           return (
             <EnemyItem

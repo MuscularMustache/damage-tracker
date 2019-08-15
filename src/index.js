@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import App from './components/App';
 import EnemyList from './components/EnemyList';
@@ -12,8 +12,8 @@ const Root = () => (
   <Router>
     <App>
       <Route path="/" exact component={LandingPage} />
-      <Route path="/player" exact component={EnemyList} />
-      <Route path="/dm" exact component={DmEnemyList} />
+      <Route path="/player" exact render={(props) => <EnemyList {...props} enemyTableName='enemies' />} />
+      <Route path="/dm" exact render={(props) => <DmEnemyList {...props} enemyTableName='dmEnemies' />} />
     </App>
   </Router>
 );
