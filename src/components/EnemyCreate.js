@@ -13,6 +13,12 @@ class EnemyCreate extends Component {
     this.props.addEnemy(this.state.enemyName);
   }
 
+	keyPress = e => {
+		if (e.keyCode == 13){
+			this.addEnemy();
+		}
+	}
+
 	render() {
 		return (
 			<div className="enemy-create">
@@ -20,6 +26,7 @@ class EnemyCreate extends Component {
           <input
             onChange={this.onInputChange}
             value={this.state.enemyName}
+						onKeyDown={this.keyPress}
             className="standard-input"
           />
           <button className="icon-text-button" onClick={this.addEnemy}>
