@@ -9,6 +9,10 @@ class EnemyCreate extends Component {
   };
 
   addEnemy = () => {
+		if (this.state.enemyName === '') {
+			return;
+		}
+
     this.setState({ enemyName: '' });
     this.props.addEnemy(this.state.enemyName);
   }
