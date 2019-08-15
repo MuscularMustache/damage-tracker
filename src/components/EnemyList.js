@@ -105,7 +105,7 @@ class EnemyList extends Component {
     return (
   		<div className="enemy-list">
         <div className="enemy-item-wrap">
-        <h2>PLAYER PAGE</h2>
+        <h2>{this.props.enemyTableName}</h2>
   			{enemies.map(enemy => {
           return (
             <EnemyItem
@@ -116,7 +116,7 @@ class EnemyList extends Component {
           );
         })}
         </div>
-  			<EnemyCreate addEnemy={this.addEnemy} />
+  			<EnemyCreate addEnemy={this.addEnemy} tableName={this.props.enemyTableName} />
         <button className="clear-all" onClick={this.clearAllEnemies}>Clear All</button>
         <HealthModal
           modalState={{show: this.state.modalShown, activeModal: this.state.modalActive, modalName: 'healthModal'}}

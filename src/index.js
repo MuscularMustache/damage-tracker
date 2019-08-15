@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import App from './components/App';
 import EnemyList from './components/EnemyList';
 import LandingPage from './components/LandingPage';
-import DmEnemyList from './components/DmEnemyList';
 import './styles/index.scss';
 
 const Root = () => (
@@ -13,7 +12,7 @@ const Root = () => (
     <App>
       <Route path="/" exact component={LandingPage} />
       <Route path="/player" exact render={(props) => <EnemyList {...props} enemyTableName='enemies' />} />
-      <Route path="/dm" exact render={(props) => <DmEnemyList {...props} enemyTableName='dmEnemies' />} />
+      <Route path="/dm" exact render={(props) => <EnemyList {...props} enemyTableName='dmEnemies' />} />
     </App>
   </Router>
 );

@@ -2,19 +2,20 @@ import React, { Component } from 'react';
 import '../styles/enemycreate.scss';
 
 class EnemyCreate extends Component {
-	state = { enemyName: '' }
+	state = { enemyName: '', enemyMaxHealth: '' }
 
-  onInputChange = event => {
-    this.setState({ enemyName: event.target.value });
+  onInputChange = (event, stateName) => {
+		console.log(event.target.value);
+    this.setState({ [stateName]: event.target.value });
   };
 
   addEnemy = () => {
-		if (this.state.enemyName === '') {
+		if (this.state.enemyName === '' || (this.props.tableName === 'dmEnemies' && this.state.enemyMaxHealth === '')) {
 			return;
 		}
 
-    this.setState({ enemyName: '' });
-    this.props.addEnemy(this.state.enemyName);
+    this.setState({ enemyName: '', enemyMaxHealth: '' });
+    this.props.addEnemy(this.state.enemyName, this.state.enemyMaxHealth);
   }
 
 	keyPress = e => {
@@ -23,16 +24,33 @@ class EnemyCreate extends Component {
 		}
 	}
 
+	healthInput = () => {
+		if (this.props.tableName === 'dmEnemies') {
+			return (
+				<input
+					onChange={e => this.onInputChange(e, 'enemyMaxHealth')}
+					value={this.state.enemyMaxHealth}
+					type='number'
+					onKeyDown={this.keyPress}
+					className="standard-input"
+					placeholder="Health"
+				/>
+			);
+		}
+	}
+
 	render() {
 		return (
 			<div className="enemy-create">
         <div className="enemy-input">
           <input
-            onChange={this.onInputChange}
+            onChange={e => this.onInputChange(e, 'enemyName')}
             value={this.state.enemyName}
 						onKeyDown={this.keyPress}
             className="standard-input"
+						placeholder="Enemy"
           />
+					{this.healthInput()}
           <button className="icon-text-button" onClick={this.addEnemy}>
             <i className="material-icons icon-button">add</i>
             <span>
