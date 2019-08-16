@@ -3,17 +3,21 @@ import Modal from './Modal';
 import '../styles/healthmodal.scss';
 
 class HealthModal extends Component {
-  state = { health: '', symbol: '+', isDm: false }
+  state = { health: '', symbol: '+', isDm: false, activeEnemyId: null }
 
-  // NOTE - update componentWillReceiveProps. This is in the process of being depricated
-  componentWillReceiveProps(nextProps){
-    if (nextProps.activeEnemy !== this.props.activeEnemy) {
-      const isDm = nextProps.activeEnemy.maxHealth !== 'noHealth';
-      this.setState({
+  static getDerivedStateFromProps(props, state) {
+    if (props.activeEnemy.id !== state.activeEnemyId) {
+      const isDm = props.activeEnemy.maxHealth !== 'noHealth';
+
+      return {
         symbol: isDm ? '-' : '+',
-        isDm: isDm ? true : false
-      })
+        isDm: isDm ? true : false,
+        activeEnemyId: props.activeEnemy.id,
+      };
     }
+
+    // No state update necessary
+    return null;
   }
 
   buttonClick = num => {
