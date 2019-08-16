@@ -93,7 +93,12 @@ class EnemyList extends Component {
           })
         ];
         newList.splice(index, 0, Object.assign({}, enemyToUpdate, { health, healthHistory }))
-        this.setState({ enemies: newList, modalShown: false });
+        this.setState({ enemies: newList, modalShown: false }, () => {
+          // if enemy has taken more damage than its max health then kill it
+          if (enemyToUpdate.maxHealth !== 'noHealth' && health >= enemyToUpdate.maxHealth) {
+            this.toggleDeath(id, false);
+          }
+        });
       });
   }
 

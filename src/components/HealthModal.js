@@ -5,6 +5,7 @@ import '../styles/healthmodal.scss';
 class HealthModal extends Component {
   state = { health: '', symbol: '+', isDm: false }
 
+  // NOTE - update componentWillReceiveProps. This is in the process of being depricated
   componentWillReceiveProps(nextProps){
     if (nextProps.activeEnemy !== this.props.activeEnemy) {
       const isDm = nextProps.activeEnemy.maxHealth !== 'noHealth';
@@ -25,7 +26,6 @@ class HealthModal extends Component {
     const activeHealth = parseInt(activeEnemy.health);
     const health = type === 'heal' ? activeHealth - stateHealth : activeHealth + stateHealth;
     let appendedHealth;
-    // let appendedHealth = type === 'heal' ? `- ${this.state.health}` : `+ ${this.state.health}`;
 
     if (this.state.isDm) {
       appendedHealth = type === 'heal' ? `+ ${this.state.health}` : `- ${this.state.health}`;
