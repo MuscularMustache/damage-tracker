@@ -5,7 +5,6 @@ class EnemyCreate extends Component {
 	state = { enemyName: '', enemyMaxHealth: '' }
 
   onInputChange = (event, stateName) => {
-		console.log(event.target.value);
     this.setState({ [stateName]: event.target.value });
   };
 

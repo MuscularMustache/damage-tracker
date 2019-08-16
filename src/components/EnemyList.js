@@ -19,9 +19,10 @@ class EnemyList extends Component {
       });
   }
 
-  addEnemy = name => {
+  addEnemy = (name, enemyMaxHealth) => {
     const enemy = {
       name,
+      maxHealth: parseInt(enemyMaxHealth) || 'noHealth',
       health: 0,
       alive: true,
       healthHistory: []

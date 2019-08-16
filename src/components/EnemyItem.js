@@ -6,9 +6,25 @@ const EnemyItem = ({enemy, toggleModal}) => {
     return <div />;
   }
 
+  function EnemyNameAndHealth() {
+    if (enemy.maxHealth === 'noHealth') {
+      return (
+        <p onClick={() => toggleModal(enemy, 'healthModal')} className="unselect">
+          {enemy.name}: <strong>{enemy.health}</strong>pts of damage
+        </p>
+      );
+    } else {
+      return (
+        <p onClick={() => toggleModal(enemy, 'healthModal')} className="unselect">
+          {enemy.name}: <strong>{enemy.maxHealth - enemy.health}</strong> / {enemy.maxHealth}
+        </p>
+      );
+    }
+  }
+
 	return (
     <div className={enemy.alive ? 'enemy-item' : 'enemy-item dead'}>
-      <p onClick={() => toggleModal(enemy, 'healthModal')} className="unselect">{enemy.name} - <strong>{enemy.health}</strong>pts of damage</p>
+      <EnemyNameAndHealth />
       <i className="material-icons icon-button" onClick={() => toggleModal(enemy, 'optionModal')}>more_vert</i>
     </div>
   );
