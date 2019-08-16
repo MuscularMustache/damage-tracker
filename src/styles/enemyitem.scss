@@ -34,13 +34,28 @@
       bottom: 6px;
       font-size: 13px;
       line-height: 15px;
+      pointer-events: none;
       span {
         display: inline-block;
         &:nth-child(n+2) {
           &::before {
-            content: ', '
+            content: ', ';
+            color: black
           }
         }
+
+        &.blinded { color: black; }
+        &.bleeding { color: red; }
+        &.charmed { color: blueviolet; }
+        &.deafened { color: grey; }
+        &.exhausted { color: #ca542e; }
+        &.frightened { color: yellow; }
+        &.incapacitated, &.unconscious { color: darkblue; }
+        &.invisible { color: white; }
+        &.poisoned { color: green; }
+        &.paralyzed, &.petrified { color: brown; }
+        &.restrained { color: maroon }
+        &.stunned { color: cornflowerblue }
       }
     }
   }

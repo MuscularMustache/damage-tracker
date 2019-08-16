@@ -29,22 +29,31 @@ const OptionModal = props => {
     }
   }
 
+  const customStyles = {
+    option: (provided, state) => ({
+      ...provided,
+      color: '#6b77e0',
+    })
+  }
+
   const effects = [
     { idx: 0, value: 'blinded', label: 'Blinded' },
-    { idx: 1, value: 'charmed', label: 'Charmed' },
-    { idx: 2, value: 'deafened', label: 'Deafened' },
-    { idx: 3, value: 'exhausted', label: 'Exhausted' },
-    { idx: 4, value: 'frightened', label: 'Frightened' },
-    { idx: 5, value: 'grappled', label: 'Grappled' },
-    { idx: 6, value: 'incapacitated', label: 'Incapacitated' },
-    { idx: 7, value: 'invisible', label: 'Invisible' },
-    { idx: 8, value: 'paralyzed', label: 'Paralyzed' },
-    { idx: 9, value: 'petrified', label: 'Petrified' },
-    { idx: 10, value: 'poisoned', label: 'Poisoned' },
-    { idx: 11, value: 'prone', label: 'Prone' },
-    { idx: 12, value: 'restrained', label: 'Restrained' },
-    { idx: 13, value: 'stunned', label: 'Stunned' },
-    { idx: 14, value: 'unconscious', label: 'Unconscious' }
+    { idx: 1, value: 'bleeding', label: 'Bleeding' },
+    { idx: 2, value: 'charmed', label: 'Charmed' },
+    { idx: 3, value: 'deafened', label: 'Deafened' },
+    { idx: 4, value: 'exhausted', label: 'Exhausted' },
+    { idx: 5, value: 'frightened', label: 'Frightened' },
+    { idx: 6, value: 'grappled', label: 'Grappled' },
+    { idx: 7, value: 'incapacitated', label: 'Incapacitated' },
+    { idx: 8, value: 'invisible', label: 'Invisible' },
+    { idx: 9, value: 'other', label: 'Other' },
+    { idx: 10, value: 'paralyzed', label: 'Paralyzed' },
+    { idx: 11, value: 'petrified', label: 'Petrified' },
+    { idx: 12, value: 'poisoned', label: 'Poisoned' },
+    { idx: 13, value: 'prone', label: 'Prone' },
+    { idx: 14, value: 'restrained', label: 'Restrained' },
+    { idx: 15, value: 'stunned', label: 'Stunned' },
+    { idx: 16, value: 'unconscious', label: 'Unconscious' }
   ];
 
   let activeEffects;
@@ -64,6 +73,7 @@ const OptionModal = props => {
       </div>
       <div className="status-effects">
         <Select
+          styles={customStyles}
           options={effects}
           closeMenuOnSelect={true}
           isMulti
