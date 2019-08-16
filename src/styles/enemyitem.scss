@@ -13,6 +13,7 @@
     display: flex;
     justify-content: space-between;
     border-top: 1px solid $mid-purple;
+    position: relative;
     &.dead {
       opacity: .7;
       p {
@@ -27,6 +28,20 @@
       font-size: 20px;
       line-height: 50px;
       text-transform: capitalize;
+    }
+    .status-effects {
+      position: absolute;
+      bottom: 6px;
+      font-size: 13px;
+      line-height: 15px;
+      span {
+        display: inline-block;
+        &:nth-child(n+2) {
+          &::before {
+            content: ', '
+          }
+        }
+      }
     }
   }
   .no-enemies {

@@ -25,7 +25,8 @@ class EnemyContainer extends Component {
       maxHealth: parseInt(enemyMaxHealth) || 'noHealth',
       damage: 0,
       alive: true,
-      damageHistory: []
+      damageHistory: [],
+      statusEffects: []
     };
     db.table(this.props.enemyTableName)
       .add(enemy)
@@ -102,6 +103,25 @@ class EnemyContainer extends Component {
     this.setState({ modalShown: !this.state.modalShown, modalActive: modalName || '', activeEnemy: enemy || {} });
   }
 
+  statusSelect = (statusEffects, id) => {
+    // TODO: GENERALIZE THIS - ITS NEAR IDENTICAL TO TOGGLEDEATH OTHER THAN FIELD UPDATED AND modalShown
+    db.table(this.props.enemyTableName)
+      .update(id, { statusEffects })
+      .then(() => {
+        let index;
+        const enemyToUpdate = this.state.enemies.find(enemy => enemy.id === id);
+        const enemyObj = Object.assign({}, enemyToUpdate, { statusEffects });
+        const newList = [
+          ...this.state.enemies.filter((enemy, idx) => {
+            if (enemy.id === id) { index = idx; }
+            return enemy.id !== id;
+          })
+        ];
+        newList.splice(index, 0, enemyObj)
+        this.setState({ enemies: newList });
+      });
+  }
+
   render() {
     return (
   		<div className={`enemy-list ${this.props.enemyTableName === 'dmEnemies' ? 'dm-enemy-list' : ''}`}>
@@ -122,6 +142,7 @@ class EnemyContainer extends Component {
           activeEnemy={this.state.activeEnemy}
           deleteEnemy={this.deleteEnemy}
           toggleDeath={this.toggleDeath}
+          statusSelect={this.statusSelect}
         />
   		</div>
   	);

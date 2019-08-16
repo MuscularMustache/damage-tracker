@@ -1,6 +1,8 @@
 import React from 'react';
 import Modal from './Modal';
+// import ConditionSelect from './ConditionSelect';
 import '../styles/optionmodal.scss';
+import Select from 'react-select';
 
 const OptionModal = props => {
   const {show, activeModal, modalName} = props.modalState;
@@ -27,6 +29,31 @@ const OptionModal = props => {
     }
   }
 
+  const effects = [
+    { idx: 0, value: 'blinded', label: 'Blinded' },
+    { idx: 1, value: 'charmed', label: 'Charmed' },
+    { idx: 2, value: 'deafened', label: 'Deafened' },
+    { idx: 3, value: 'exhausted', label: 'Exhausted' },
+    { idx: 4, value: 'frightened', label: 'Frightened' },
+    { idx: 5, value: 'grappled', label: 'Grappled' },
+    { idx: 6, value: 'incapacitated', label: 'Incapacitated' },
+    { idx: 7, value: 'invisible', label: 'Invisible' },
+    { idx: 8, value: 'paralyzed', label: 'Paralyzed' },
+    { idx: 9, value: 'petrified', label: 'Petrified' },
+    { idx: 10, value: 'poisoned', label: 'Poisoned' },
+    { idx: 11, value: 'prone', label: 'Prone' },
+    { idx: 12, value: 'restrained', label: 'Restrained' },
+    { idx: 13, value: 'stunned', label: 'Stunned' },
+    { idx: 14, value: 'unconscious', label: 'Unconscious' }
+  ];
+
+  let activeEffects;
+  if (activeEnemy.statusEffects && activeEnemy.statusEffects.length) {
+    activeEffects = activeEnemy.statusEffects.map(eft => effects[eft.idx])
+  } else {
+    activeEffects = null;
+  }
+
   return (
     <Modal class="option-modal" toggleModal={props.toggleModal}>
       <h2>{name}</h2>
@@ -34,6 +61,16 @@ const OptionModal = props => {
       <div>
         <strong>Damage History</strong>
         {history()}
+      </div>
+      <div className="status-effects">
+        <Select
+          options={effects}
+          closeMenuOnSelect={true}
+          isMulti
+          placeholder="Select Status Effects"
+          onChange={(effects) => props.statusSelect(effects, activeEnemy.id)}
+          defaultValue={activeEffects}
+        />
       </div>
       <div className="buttons">
         <button
