@@ -1,12 +1,11 @@
 import React from 'react';
 import Header from './Header';
-import EnemyList from './EnemyList';
 
-const App = () => {
+const App = props => {
 	return (
 		<div>
 			<Header />
-			<EnemyList />
+			{props.children}
 		</div>
 	);
 }

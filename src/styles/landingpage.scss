@@ -1,0 +1,22 @@
+@import 'variables';
+
+.landing-page {
+  h3 {
+    text-align: center;
+    margin-top: 50px;
+  }
+
+  p {
+    margin: 20px auto;
+    max-width: 400px;
+    text-align: center;
+    padding: 0 25px;
+    box-sizing: border-box;
+  }
+  
+  .link-button {
+    &:first-of-type {
+      margin-top: 60px;
+    }
+  }
+}
