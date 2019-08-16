@@ -5,6 +5,12 @@ import '../styles/healthmodal.scss';
 class HealthModal extends Component {
   state = { health: '', symbol: '+' }
 
+  componentWillReceiveProps(nextProps){
+    if (nextProps.activeEnemy !== this.props.activeEnemy) {
+      this.setState({ symbol: nextProps.activeEnemy.maxHealth !== 'noHealth' ? '-' : '+' })
+    }
+  }
+
   buttonClick = num => {
     this.setState({ health: `${this.state.health}${num}` });
   }
@@ -44,7 +50,9 @@ class HealthModal extends Component {
         <Modal toggleModal={this.toggleModal} class="health-modal">
           <header>
             <h3>{activeEnemy.name} </h3>
-            <h2>{activeEnemy.health} {this.state.symbol} {this.state.health}</h2>
+            <h2>
+              {activeEnemy.maxHealth !== 'noHealth' ? activeEnemy.maxHealth - activeEnemy.health : activeEnemy.health} {this.state.symbol} {this.state.health}
+            </h2>
             <i className="material-icons icon-button" onClick={this.deleteChar}>backspace</i>
           </header>
           <div className="row">
