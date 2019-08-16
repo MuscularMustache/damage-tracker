@@ -10,13 +10,13 @@ const EnemyItem = ({enemy, toggleModal}) => {
   function EnemyNameAndHealth() {
     if (!isDm) {
       return (
-        <p onClick={() => toggleModal(enemy, 'healthModal')} className="unselect">
+        <p onClick={() => toggleModal(enemy, 'damageModal')} className="unselect">
           {enemy.name} - <strong>{enemy.damage}</strong>pts of damage
         </p>
       );
     } else {
       return (
-        <p onClick={() => toggleModal(enemy, 'healthModal')} className="unselect">
+        <p onClick={() => toggleModal(enemy, 'damageModal')} className="unselect">
           {enemy.name}: <strong>{enemy.maxHealth - enemy.damage}</strong> / {enemy.maxHealth}
         </p>
       );

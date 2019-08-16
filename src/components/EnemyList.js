@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import EnemyCreate from './EnemyCreate';
 import EnemyItem from './EnemyItem';
-import HealthModal from './HealthModal';
+import DamageModal from './DamageModal';
 import OptionModal from './OptionModal';
 import '../styles/enemylist.scss';
 
@@ -123,8 +123,8 @@ class EnemyList extends Component {
         </div>
   			<EnemyCreate addEnemy={this.addEnemy} tableName={this.props.enemyTableName} />
         <button className="clear-all" onClick={this.clearAllEnemies}>Clear All</button>
-        <HealthModal
-          modalState={{show: this.state.modalShown, activeModal: this.state.modalActive, modalName: 'healthModal'}}
+        <DamageModal
+          modalState={{show: this.state.modalShown, activeModal: this.state.modalActive, modalName: 'damageModal'}}
           toggleModal={this.toggleModal}
           activeEnemy={this.state.activeEnemy}
           evaluateDamage={this.evaluateDamage}

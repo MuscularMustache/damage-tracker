@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Modal from './Modal';
-import '../styles/healthmodal.scss';
+import '../styles/damagemodal.scss';
 
-class HealthModal extends Component {
+class DamageModal extends Component {
   state = { damage: '', symbol: '+', isDm: false, activeEnemyId: null }
 
   static getDerivedStateFromProps(props, state) {
@@ -96,4 +96,4 @@ class HealthModal extends Component {
   }
 }
 
-export default HealthModal;
+export default DamageModal;
