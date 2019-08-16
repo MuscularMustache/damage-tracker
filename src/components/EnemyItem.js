@@ -54,6 +54,7 @@ const EnemyItem = ({enemy, toggleModal}) => {
 	return (
     <div className={enemy.alive ? 'enemy-item' : 'enemy-item dead'} style={itemStyle}>
       <EnemyNameAndHealth />
+      <p className="status-effects">{enemy.statusEffects.map(se => <span key={se.value} className={se.value}>{se.label}</span>)}</p>
       <i className="material-icons icon-button" onClick={() => toggleModal(enemy, 'optionModal')}>more_vert</i>
     </div>
   );
