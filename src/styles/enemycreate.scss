@@ -17,6 +17,9 @@
       border: none;
       outline: none;
       padding: 0 20px;
+      + input {
+        max-width: 73px;
+      }
     }
   }
 }
