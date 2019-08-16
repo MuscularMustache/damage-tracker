@@ -8,7 +8,7 @@ const LandingPage = () => {
 			<h3>Welcome to Damage Tracker.</h3>
 			<p>Where either dungeon masters or players can keep track of the health of enemies.</p>
 			<p>This is a continually developed personal project with more features that will get added in whenever I have time.</p>
-			<p>To speed up the process, feel free to donate below. If the button isn't there I haven't built it yet. 😉</p>
+			<p>To speed up the process, feel free to donate below. If the button isn't there I haven't built it yet. <span role="img" aria-label="winky face">😉</span></p>
 			<Link className="link-button" to="/dm">Master of Puppets</Link>
 			<Link className="link-button" to="/player">Puppets</Link>
 		</div>

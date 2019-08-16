@@ -57,11 +57,7 @@ class EnemyList extends Component {
             return enemy.id !== id;
           })
         ];
-        if (alive) {
-          newList.splice(index, 0, enemyObj)
-        } else {
-          newList.push(enemyObj)
-        }
+        newList.splice(index, 0, enemyObj)
         this.setState({ enemies: newList, modalShown: false });
       });
   }
@@ -109,7 +105,7 @@ class EnemyList extends Component {
   render() {
     const { enemies } = this.state;
     return (
-  		<div className="enemy-list">
+  		<div className={`enemy-list ${this.props.enemyTableName === 'dmEnemies' ? 'dm-enemy-list' : ''}`}>
         <div className="enemy-item-wrap">
   			{enemies.map(enemy => {
           return (

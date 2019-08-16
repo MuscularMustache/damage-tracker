@@ -24,16 +24,28 @@
   }
 }
 
-@media screen and (max-width: 430px) {
-  .enemy-create {
-    .enemy-input {
-      .icon-text-button {
-        min-width: 50px;
-        max-width: 50px;
-        span {
-          display: none;
-        }
+@mixin minimize-button {
+  .enemy-input {
+    .icon-text-button {
+      min-width: 50px;
+      max-width: 50px;
+      span {
+        display: none;
       }
     }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .dm-enemy-list {
+    .enemy-create {
+      @include minimize-button;
+    }
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .enemy-create {
+    @include minimize-button;
   }
 }
