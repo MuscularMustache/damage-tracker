@@ -3,7 +3,7 @@ import Modal from './Modal';
 import '../styles/healthmodal.scss';
 
 class HealthModal extends Component {
-  state = { health: '', symbol: '+', isDm: false, activeEnemyId: null }
+  state = { damage: '', symbol: '+', isDm: false, activeEnemyId: null }
 
   static getDerivedStateFromProps(props, state) {
     if (props.activeEnemy.id !== state.activeEnemyId) {
@@ -21,37 +21,37 @@ class HealthModal extends Component {
   }
 
   buttonClick = num => {
-    this.setState({ health: `${this.state.health}${num}` });
+    this.setState({ damage: `${this.state.damage}${num}` });
   }
 
-  evaluateHealth = type => {
+  evaluateDamage = type => {
     const { activeEnemy } = this.props;
-    const stateHealth = parseInt(this.state.health);
-    const activeHealth = parseInt(activeEnemy.health);
-    const health = type === 'heal' ? activeHealth - stateHealth : activeHealth + stateHealth;
-    let appendedHealth;
+    const stateDamage = parseInt(this.state.damage);
+    const activeDamage = parseInt(activeEnemy.damage);
+    const damage = type === 'heal' ? activeDamage - stateDamage : activeDamage + stateDamage;
+    let appendedDamage;
 
     if (this.state.isDm) {
-      appendedHealth = type === 'heal' ? `+ ${this.state.health}` : `- ${this.state.health}`;
+      appendedDamage = type === 'heal' ? `+ ${this.state.damage}` : `- ${this.state.damage}`;
     } else {
-      appendedHealth = type === 'heal' ? `- ${this.state.health}` : `+ ${this.state.health}`;
+      appendedDamage = type === 'heal' ? `- ${this.state.damage}` : `+ ${this.state.damage}`;
     }
 
-    const healthHistory = [...activeEnemy.healthHistory, appendedHealth];
+    const damageHistory = [...activeEnemy.damageHistory, appendedDamage];
 
-    this.props.evaluateHealth(activeEnemy.id, health, healthHistory);
-    this.setState({ health: ''});
+    this.props.evaluateDamage(activeEnemy.id, damage, damageHistory);
+    this.setState({ damage: ''});
   }
 
   toggleModal = () => {
-    this.setState({ health: '' }, () => {
+    this.setState({ damage: '' }, () => {
       this.props.toggleModal();
     })
   }
 
   deleteChar = () => {
-    let health = this.state.health;
-    this.setState({ health: health.substr(0, health.length-1)});
+    let damage = this.state.damage;
+    this.setState({ damage: damage.substr(0, damage.length-1)});
   }
 
   render() {
@@ -63,11 +63,11 @@ class HealthModal extends Component {
     const { activeEnemy } = this.props;
 
     return (
-        <Modal toggleModal={this.toggleModal} class="health-modal">
+        <Modal toggleModal={this.toggleModal} class="damage-modal">
           <header>
             <h3>{activeEnemy.name} </h3>
             <h2>
-              {this.state.isDm ? activeEnemy.maxHealth - activeEnemy.health : activeEnemy.health} {this.state.symbol} {this.state.health}
+              {this.state.isDm ? activeEnemy.maxHealth - activeEnemy.damage : activeEnemy.damage} {this.state.symbol} {this.state.damage}
             </h2>
             <i className="material-icons icon-button" onClick={this.deleteChar}>backspace</i>
           </header>
@@ -87,9 +87,9 @@ class HealthModal extends Component {
             <button onClick={() => this.buttonClick(3)}>3</button>
           </div>
           <div className="row">
-            <button className="heal" disabled={(this.state.health.length <= 0)} onClick={() => this.evaluateHealth('heal')}>Heal</button>
+            <button className="heal" disabled={(this.state.damage.length <= 0)} onClick={() => this.evaluateDamage('heal')}>Heal</button>
             <button onClick={() => this.buttonClick(0)}>0</button>
-            <button className="damage" disabled={(this.state.health.length <= 0)} onClick={() => this.evaluateHealth('damage')}>Damage</button>
+            <button className="damage" disabled={(this.state.damage.length <= 0)} onClick={() => this.evaluateDamage('damage')}>Damage</button>
           </div>
         </Modal>
     );

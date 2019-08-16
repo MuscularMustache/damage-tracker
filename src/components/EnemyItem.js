@@ -11,19 +11,19 @@ const EnemyItem = ({enemy, toggleModal}) => {
     if (!isDm) {
       return (
         <p onClick={() => toggleModal(enemy, 'healthModal')} className="unselect">
-          {enemy.name} - <strong>{enemy.health}</strong>pts of damage
+          {enemy.name} - <strong>{enemy.damage}</strong>pts of damage
         </p>
       );
     } else {
       return (
         <p onClick={() => toggleModal(enemy, 'healthModal')} className="unselect">
-          {enemy.name}: <strong>{enemy.maxHealth - enemy.health}</strong> / {enemy.maxHealth}
+          {enemy.name}: <strong>{enemy.maxHealth - enemy.damage}</strong> / {enemy.maxHealth}
         </p>
       );
     }
   }
 
-  let healthPercentage = ((enemy.maxHealth-enemy.health)/enemy.maxHealth)*100;
+  let healthPercentage = ((enemy.maxHealth-enemy.damage)/enemy.maxHealth)*100;
 
   // this overwrites the css to create a "health bar"
   let itemStyle = {

@@ -8,17 +8,17 @@ const OptionModal = props => {
     return <div />
   }
 
-  const { activeEnemy, activeEnemy: { name, health, healthHistory} } = props;
+  const { activeEnemy, activeEnemy: { name, damage, damageHistory} } = props;
   const isDM = activeEnemy.maxHealth !== 'noHealth';
 
   const history = () => {
-    if (healthHistory.length) {
+    if (damageHistory.length) {
       return (
-        <p className="health-history">
+        <p className="damage-history">
           <span>{isDM ? activeEnemy.maxHealth : 0}</span>
-          {healthHistory.map((health, index) => {
-            let damage = isDM ? health.includes('-') : health.includes('+');
-            return <span key={activeEnemy.id-index} className={damage ? 'damage' : 'healed'}> {health}</span>
+          {damageHistory.map((damage, index) => {
+            let damaged = isDM ? damage.includes('-') : damage.includes('+');
+            return <span key={activeEnemy.id-index} className={damaged ? 'damage' : 'healed'}> {damage}</span>
           })}
         </p>
       );
@@ -30,9 +30,9 @@ const OptionModal = props => {
   return (
     <Modal class="option-modal" toggleModal={props.toggleModal}>
       <h2>{name}</h2>
-      <h3>has taken {health} damage</h3>
+      <h3>has taken {damage} damage</h3>
       <div>
-        <strong>Health History</strong>
+        <strong>Damage History</strong>
         {history()}
       </div>
       <div className="buttons">

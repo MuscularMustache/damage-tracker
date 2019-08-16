@@ -23,9 +23,9 @@ class EnemyList extends Component {
     const enemy = {
       name,
       maxHealth: parseInt(enemyMaxHealth) || 'noHealth',
-      health: 0,
+      damage: 0,
       alive: true,
-      healthHistory: []
+      damageHistory: []
     };
     db.table(this.props.enemyTableName)
       .add(enemy)
@@ -78,9 +78,9 @@ class EnemyList extends Component {
       });
   }
 
-  evaluateHealth = (id, health, healthHistory) => {
+  evaluateDamage = (id, damage, damageHistory) => {
     db.table(this.props.enemyTableName)
-      .update(id, { health, healthHistory })
+      .update(id, { damage, damageHistory })
       .then(() => {
         let index;
         const enemyToUpdate = this.state.enemies.find(enemy => enemy.id === id);
@@ -92,10 +92,10 @@ class EnemyList extends Component {
             return enemy.id !== id;
           })
         ];
-        newList.splice(index, 0, Object.assign({}, enemyToUpdate, { health, healthHistory }))
+        newList.splice(index, 0, Object.assign({}, enemyToUpdate, { damage, damageHistory }))
         this.setState({ enemies: newList, modalShown: false }, () => {
           // if enemy has taken more damage than its max health then kill it
-          if (enemyToUpdate.maxHealth !== 'noHealth' && health >= enemyToUpdate.maxHealth) {
+          if (enemyToUpdate.maxHealth !== 'noHealth' && damage >= enemyToUpdate.maxHealth) {
             this.toggleDeath(id, false);
           }
         });
@@ -127,7 +127,7 @@ class EnemyList extends Component {
           modalState={{show: this.state.modalShown, activeModal: this.state.modalActive, modalName: 'healthModal'}}
           toggleModal={this.toggleModal}
           activeEnemy={this.state.activeEnemy}
-          evaluateHealth={this.evaluateHealth}
+          evaluateDamage={this.evaluateDamage}
         />
         <OptionModal
           modalState={{show: this.state.modalShown, activeModal: this.state.modalActive, modalName: 'optionModal'}}
