@@ -1,8 +1,20 @@
 @import 'variables';
 
+h3 {
+  text-align: center;
+}
+
+p {
+  margin: 20px auto;
+  max-width: 400px;
+  text-align: center;
+  padding: 0 25px;
+  box-sizing: border-box;
+}
+
 .link-button {
   &:first-of-type {
-    margin-top: 100px;
+    margin-top: 60px;
   }
   background: $darker-purple;
   border-radius: 5px;
@@ -13,6 +25,6 @@
   margin: 40px 20px;
   padding: 10px;
   text-align: center;
-  text-decoration: none;  
+  text-decoration: none;
   width: calc(100% - 40px);
 }
