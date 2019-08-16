@@ -3,11 +3,15 @@ import Modal from './Modal';
 import '../styles/healthmodal.scss';
 
 class HealthModal extends Component {
-  state = { health: '', symbol: '+' }
+  state = { health: '', symbol: '+', isDm: false }
 
   componentWillReceiveProps(nextProps){
     if (nextProps.activeEnemy !== this.props.activeEnemy) {
-      this.setState({ symbol: nextProps.activeEnemy.maxHealth !== 'noHealth' ? '-' : '+' })
+      const isDm = nextProps.activeEnemy.maxHealth !== 'noHealth';
+      this.setState({
+        symbol: isDm ? '-' : '+',
+        isDm: isDm ? true : false
+      })
     }
   }
 
@@ -20,7 +24,15 @@ class HealthModal extends Component {
     const stateHealth = parseInt(this.state.health);
     const activeHealth = parseInt(activeEnemy.health);
     const health = type === 'heal' ? activeHealth - stateHealth : activeHealth + stateHealth;
-    const appendedHealth = type === 'heal' ? `- ${this.state.health}` : `+ ${this.state.health}`;
+    let appendedHealth;
+    // let appendedHealth = type === 'heal' ? `- ${this.state.health}` : `+ ${this.state.health}`;
+
+    if (this.state.isDm) {
+      appendedHealth = type === 'heal' ? `+ ${this.state.health}` : `- ${this.state.health}`;
+    } else {
+      appendedHealth = type === 'heal' ? `- ${this.state.health}` : `+ ${this.state.health}`;
+    }
+
     const healthHistory = [...activeEnemy.healthHistory, appendedHealth];
 
     this.props.evaluateHealth(activeEnemy.id, health, healthHistory);
@@ -51,7 +63,7 @@ class HealthModal extends Component {
           <header>
             <h3>{activeEnemy.name} </h3>
             <h2>
-              {activeEnemy.maxHealth !== 'noHealth' ? activeEnemy.maxHealth - activeEnemy.health : activeEnemy.health} {this.state.symbol} {this.state.health}
+              {this.state.isDm ? activeEnemy.maxHealth - activeEnemy.health : activeEnemy.health} {this.state.symbol} {this.state.health}
             </h2>
             <i className="material-icons icon-button" onClick={this.deleteChar}>backspace</i>
           </header>
