@@ -1,30 +1,22 @@
 @import 'variables';
 
-h3 {
-  text-align: center;
-}
-
-p {
-  margin: 20px auto;
-  max-width: 400px;
-  text-align: center;
-  padding: 0 25px;
-  box-sizing: border-box;
-}
-
-.link-button {
-  &:first-of-type {
-    margin-top: 60px;
+.landing-page {
+  h3 {
+    text-align: center;
+    margin-top: 50px;
   }
-  background: $darker-purple;
-  border-radius: 5px;
-  box-shadow: $shadow;
-  box-sizing: border-box;
-  color: white;
-  display: block;
-  margin: 40px 20px;
-  padding: 10px;
-  text-align: center;
-  text-decoration: none;
-  width: calc(100% - 40px);
+
+  p {
+    margin: 20px auto;
+    max-width: 400px;
+    text-align: center;
+    padding: 0 25px;
+    box-sizing: border-box;
+  }
+  
+  .link-button {
+    &:first-of-type {
+      margin-top: 60px;
+    }
+  }
 }
