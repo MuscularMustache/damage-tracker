@@ -7,6 +7,7 @@ const EnemyItem = ({enemy, toggleModal}) => {
   }
 
   const isDm = enemy.maxHealth !== 'noHealth';
+
   function EnemyNameAndHealth() {
     if (!isDm) {
       return (
@@ -23,6 +24,14 @@ const EnemyItem = ({enemy, toggleModal}) => {
     }
   }
 
+  function EnemyStatusEffects() {
+    if (enemy.statusEffects) {
+      return <p className="status-effects">{enemy.statusEffects.map(se => <span key={se.value} className={se.value}>{se.label}</span>)}</p>
+    } else {
+      return <p className="status-effects" />
+    }
+  }
+
   let healthPercentage = ((enemy.maxHealth-enemy.damage)/enemy.maxHealth)*100;
 
   // this overwrites the css to create a "health bar"
@@ -36,7 +45,7 @@ const EnemyItem = ({enemy, toggleModal}) => {
   }
 
   // bloodied
-  if (healthPercentage < 50) {
+  if (healthPercentage <= 50) {
     itemStyle = {
       background: `linear-gradient(90deg,
         rgba(255, 0, 0, .4) 0%,
@@ -54,7 +63,7 @@ const EnemyItem = ({enemy, toggleModal}) => {
 	return (
     <div className={enemy.alive ? 'enemy-item' : 'enemy-item dead'} style={itemStyle}>
       <EnemyNameAndHealth />
-      <p className="status-effects">{enemy.statusEffects.map(se => <span key={se.value} className={se.value}>{se.label}</span>)}</p>
+      <EnemyStatusEffects />
       <i className="material-icons icon-button" onClick={() => toggleModal(enemy, 'optionModal')}>more_vert</i>
     </div>
   );
