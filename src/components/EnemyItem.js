@@ -45,7 +45,7 @@ const EnemyItem = ({enemy, toggleModal}) => {
   }
 
   // bloodied
-  if (healthPercentage < 50) {
+  if (healthPercentage <= 50) {
     itemStyle = {
       background: `linear-gradient(90deg,
         rgba(255, 0, 0, .4) 0%,
