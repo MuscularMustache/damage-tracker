@@ -7,6 +7,7 @@ const EnemyItem = ({enemy, toggleModal}) => {
   }
 
   const isDm = enemy.maxHealth !== 'noHealth';
+
   function EnemyNameAndHealth() {
     if (!isDm) {
       return (
@@ -20,6 +21,14 @@ const EnemyItem = ({enemy, toggleModal}) => {
           {enemy.name}: <strong>{enemy.maxHealth - enemy.damage}</strong> / {enemy.maxHealth}
         </p>
       );
+    }
+  }
+
+  function EnemyStatusEffects() {
+    if (enemy.statusEffects) {
+      return <p className="status-effects">{enemy.statusEffects.map(se => <span key={se.value} className={se.value}>{se.label}</span>)}</p>
+    } else {
+      return <p className="status-effects" />
     }
   }
 
@@ -54,7 +63,7 @@ const EnemyItem = ({enemy, toggleModal}) => {
 	return (
     <div className={enemy.alive ? 'enemy-item' : 'enemy-item dead'} style={itemStyle}>
       <EnemyNameAndHealth />
-      <p className="status-effects">{enemy.statusEffects.map(se => <span key={se.value} className={se.value}>{se.label}</span>)}</p>
+      <EnemyStatusEffects />
       <i className="material-icons icon-button" onClick={() => toggleModal(enemy, 'optionModal')}>more_vert</i>
     </div>
   );
