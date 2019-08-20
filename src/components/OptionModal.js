@@ -37,23 +37,24 @@ const OptionModal = props => {
   }
 
   const effects = [
-    { idx: 0, value: 'blinded', label: 'Blinded' },
-    { idx: 1, value: 'bleeding', label: 'Bleeding' },
-    { idx: 2, value: 'charmed', label: 'Charmed' },
-    { idx: 3, value: 'deafened', label: 'Deafened' },
-    { idx: 4, value: 'exhausted', label: 'Exhausted' },
-    { idx: 5, value: 'frightened', label: 'Frightened' },
-    { idx: 6, value: 'grappled', label: 'Grappled' },
-    { idx: 7, value: 'incapacitated', label: 'Incapacitated' },
-    { idx: 8, value: 'invisible', label: 'Invisible' },
-    { idx: 9, value: 'other', label: 'Other' },
-    { idx: 10, value: 'paralyzed', label: 'Paralyzed' },
-    { idx: 11, value: 'petrified', label: 'Petrified' },
-    { idx: 12, value: 'poisoned', label: 'Poisoned' },
-    { idx: 13, value: 'prone', label: 'Prone' },
-    { idx: 14, value: 'restrained', label: 'Restrained' },
-    { idx: 15, value: 'stunned', label: 'Stunned' },
-    { idx: 16, value: 'unconscious', label: 'Unconscious' }
+    { idx: 0, value: 'blinded', label: 'Blinded', icon: 'fas fa-eye-slash' },
+    { idx: 1, value: 'bleeding', label: 'Bleeding', icon: 'fas fa-tint' },
+    { idx: 2, value: 'burning', label: 'Burning', icon: 'fas fa-fire' },
+    { idx: 3, value: 'charmed', label: 'Charmed', icon: 'fas fa-heart' },
+    { idx: 4, value: 'deafened', label: 'Deafened', icon: 'fas fa-deaf' },
+    { idx: 5, value: 'exhausted', label: 'Exhausted', icon: 'fas fa-bed' },
+    { idx: 6, value: 'frightened', label: 'Frightened', icon: 'fas fa-exclamation-triangle' },
+    { idx: 7, value: 'grappled', label: 'Grappled', icon: 'fas fa-lock' },
+    { idx: 8, value: 'incapacitated', label: 'Incapacitated', icon: 'fas fa-wheelchair' },
+    { idx: 9, value: 'invisible', label: 'Invisible', icon: 'fas fa-low-vision' },
+    { idx: 10, value: 'other', label: 'Other', icon: 'fas fa-dizzy' },
+    { idx: 11, value: 'paralyzed', label: 'Paralyzed', icon: 'fas fa-dizzy' },
+    { idx: 12, value: 'petrified', label: 'Petrified', icon: 'fas fa-user-slash' },
+    { idx: 13, value: 'poisoned', label: 'Poisoned', icon: 'fas fa-skull-crossbones' },
+    { idx: 14, value: 'prone', label: 'Prone', icon: 'fas fa-bed' },
+    { idx: 15, value: 'restrained', label: 'Restrained', icon: 'fas fa-lock' },
+    { idx: 16, value: 'stunned', label: 'Stunned', icon: 'fas fa-star' },
+    { idx: 17, value: 'unconscious', label: 'Unconscious', icon: 'fas fa-skull' }
   ];
 
   let activeEffects;

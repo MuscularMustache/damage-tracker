@@ -29,6 +29,23 @@
       line-height: 50px;
       text-transform: capitalize;
     }
+    .svg-inline--fa {
+      display: inline-block;
+      margin-right: 5px;
+    }
+    .blinded { color: black; }
+    .bleeding { color: red; }
+    .burning { color: darkorange; }
+    .charmed { color: blueviolet; }
+    .deafened { color: grey; }
+    .exhausted { color: #ca542e; }
+    .frightened { color: yellow; }
+    .incapacitated, .unconscious { color: darkblue; }
+    .invisible { color: white; }
+    .poisoned { color: green; }
+    .paralyzed, .petrified { color: brown; }
+    .restrained { color: maroon }
+    .stunned { color: cornflowerblue }
     .status-effects {
       position: absolute;
       bottom: 6px;
@@ -43,19 +60,6 @@
             color: black
           }
         }
-
-        &.blinded { color: black; }
-        &.bleeding { color: red; }
-        &.charmed { color: blueviolet; }
-        &.deafened { color: grey; }
-        &.exhausted { color: #ca542e; }
-        &.frightened { color: yellow; }
-        &.incapacitated, &.unconscious { color: darkblue; }
-        &.invisible { color: white; }
-        &.poisoned { color: green; }
-        &.paralyzed, &.petrified { color: brown; }
-        &.restrained { color: maroon }
-        &.stunned { color: cornflowerblue }
       }
     }
   }
