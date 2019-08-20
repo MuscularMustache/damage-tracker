@@ -12,12 +12,14 @@ const EnemyItem = ({enemy, toggleModal}) => {
     if (!isDm) {
       return (
         <p onClick={() => toggleModal(enemy, 'damageModal')} className="unselect">
+          {enemy.statusEffects ? enemy.statusEffects.map(se => <span key={se.value} className={`${se.icon} ${se.value}`}></span>) : ''}
           {enemy.name} - <strong>{enemy.damage}</strong>pts of damage
         </p>
       );
     } else {
       return (
         <p onClick={() => toggleModal(enemy, 'damageModal')} className="unselect">
+          {enemy.statusEffects ? enemy.statusEffects.map(se => <span key={se.value} className={`${se.icon} ${se.value}`}></span>) : ''}
           {enemy.name}: <strong>{enemy.maxHealth - enemy.damage}</strong> / {enemy.maxHealth}
         </p>
       );

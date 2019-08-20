@@ -1,8 +1,9 @@
 import React from 'react';
 import Modal from './Modal';
-// import ConditionSelect from './ConditionSelect';
+import effects from '../status-data';
 import '../styles/optionmodal.scss';
 import Select from 'react-select';
+import chroma from 'chroma-js';
 
 const OptionModal = props => {
   const {show, activeModal, modalName} = props.modalState;
@@ -30,31 +31,39 @@ const OptionModal = props => {
   }
 
   const customStyles = {
-    option: (provided, state) => ({
-      ...provided,
-      color: '#6b77e0',
-    })
-  }
-
-  const effects = [
-    { idx: 0, value: 'blinded', label: 'Blinded' },
-    { idx: 1, value: 'bleeding', label: 'Bleeding' },
-    { idx: 2, value: 'charmed', label: 'Charmed' },
-    { idx: 3, value: 'deafened', label: 'Deafened' },
-    { idx: 4, value: 'exhausted', label: 'Exhausted' },
-    { idx: 5, value: 'frightened', label: 'Frightened' },
-    { idx: 6, value: 'grappled', label: 'Grappled' },
-    { idx: 7, value: 'incapacitated', label: 'Incapacitated' },
-    { idx: 8, value: 'invisible', label: 'Invisible' },
-    { idx: 9, value: 'other', label: 'Other' },
-    { idx: 10, value: 'paralyzed', label: 'Paralyzed' },
-    { idx: 11, value: 'petrified', label: 'Petrified' },
-    { idx: 12, value: 'poisoned', label: 'Poisoned' },
-    { idx: 13, value: 'prone', label: 'Prone' },
-    { idx: 14, value: 'restrained', label: 'Restrained' },
-    { idx: 15, value: 'stunned', label: 'Stunned' },
-    { idx: 16, value: 'unconscious', label: 'Unconscious' }
-  ];
+    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+      const color = chroma(data.color);
+      return {
+        ...styles,
+        backgroundColor: isDisabled ? null : isSelected ? data.color : isFocused ? color.alpha(0.1).css() : null,
+        color: isDisabled ? '#ccc' : isSelected ? chroma.contrast(color, 'white') > 2 ? 'white' : 'black' : data.color,
+        cursor: isDisabled ? 'not-allowed' : 'default',
+        ':active': {
+          ...styles[':active'],
+          backgroundColor: !isDisabled && (isSelected ? data.color : color.alpha(0.3).css()),
+        },
+      };
+    },
+    multiValue: (styles, { data }) => {
+      const color = chroma(data.color);
+      return {
+        ...styles,
+        backgroundColor: color.alpha(0.1).css(),
+      };
+    },
+    multiValueLabel: (styles, { data }) => ({
+      ...styles,
+      color: data.color,
+    }),
+    multiValueRemove: (styles, { data }) => ({
+      ...styles,
+      color: data.color,
+      ':hover': {
+        backgroundColor: data.color,
+        color: 'white',
+      },
+    }),
+  };
 
   let activeEffects;
   if (activeEnemy.statusEffects && activeEnemy.statusEffects.length) {
