@@ -1,8 +1,9 @@
 import React from 'react';
 import Modal from './Modal';
-// import ConditionSelect from './ConditionSelect';
+import effects from '../status-data';
 import '../styles/optionmodal.scss';
 import Select from 'react-select';
+import chroma from 'chroma-js';
 
 const OptionModal = props => {
   const {show, activeModal, modalName} = props.modalState;
@@ -30,32 +31,39 @@ const OptionModal = props => {
   }
 
   const customStyles = {
-    option: (provided, state) => ({
-      ...provided,
-      color: '#6b77e0',
-    })
-  }
-
-  const effects = [
-    { idx: 0, value: 'blinded', label: 'Blinded', icon: 'fas fa-eye-slash' },
-    { idx: 1, value: 'bleeding', label: 'Bleeding', icon: 'fas fa-tint' },
-    { idx: 2, value: 'burning', label: 'Burning', icon: 'fas fa-fire' },
-    { idx: 3, value: 'charmed', label: 'Charmed', icon: 'fas fa-heart' },
-    { idx: 4, value: 'deafened', label: 'Deafened', icon: 'fas fa-deaf' },
-    { idx: 5, value: 'exhausted', label: 'Exhausted', icon: 'fas fa-bed' },
-    { idx: 6, value: 'frightened', label: 'Frightened', icon: 'fas fa-exclamation-triangle' },
-    { idx: 7, value: 'grappled', label: 'Grappled', icon: 'fas fa-lock' },
-    { idx: 8, value: 'incapacitated', label: 'Incapacitated', icon: 'fas fa-wheelchair' },
-    { idx: 9, value: 'invisible', label: 'Invisible', icon: 'fas fa-low-vision' },
-    { idx: 10, value: 'other', label: 'Other', icon: 'fas fa-dizzy' },
-    { idx: 11, value: 'paralyzed', label: 'Paralyzed', icon: 'fas fa-dizzy' },
-    { idx: 12, value: 'petrified', label: 'Petrified', icon: 'fas fa-user-slash' },
-    { idx: 13, value: 'poisoned', label: 'Poisoned', icon: 'fas fa-skull-crossbones' },
-    { idx: 14, value: 'prone', label: 'Prone', icon: 'fas fa-bed' },
-    { idx: 15, value: 'restrained', label: 'Restrained', icon: 'fas fa-lock' },
-    { idx: 16, value: 'stunned', label: 'Stunned', icon: 'fas fa-star' },
-    { idx: 17, value: 'unconscious', label: 'Unconscious', icon: 'fas fa-skull' }
-  ];
+    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+      const color = chroma(data.color);
+      return {
+        ...styles,
+        backgroundColor: isDisabled ? null : isSelected ? data.color : isFocused ? color.alpha(0.1).css() : null,
+        color: isDisabled ? '#ccc' : isSelected ? chroma.contrast(color, 'white') > 2 ? 'white' : 'black' : data.color,
+        cursor: isDisabled ? 'not-allowed' : 'default',
+        ':active': {
+          ...styles[':active'],
+          backgroundColor: !isDisabled && (isSelected ? data.color : color.alpha(0.3).css()),
+        },
+      };
+    },
+    multiValue: (styles, { data }) => {
+      const color = chroma(data.color);
+      return {
+        ...styles,
+        backgroundColor: color.alpha(0.1).css(),
+      };
+    },
+    multiValueLabel: (styles, { data }) => ({
+      ...styles,
+      color: data.color,
+    }),
+    multiValueRemove: (styles, { data }) => ({
+      ...styles,
+      color: data.color,
+      ':hover': {
+        backgroundColor: data.color,
+        color: 'white',
+      },
+    }),
+  };
 
   let activeEffects;
   if (activeEnemy.statusEffects && activeEnemy.statusEffects.length) {
