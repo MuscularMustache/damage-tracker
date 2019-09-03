@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import arrayMove from 'array-move';
 import EnemyCreate from './EnemyCreate';
 import EnemyList from './EnemyList';
 import DamageModal from './DamageModal';
@@ -103,6 +104,12 @@ class EnemyContainer extends Component {
     this.setState({ modalShown: !this.state.modalShown, modalActive: modalName || '', activeEnemy: enemy || {} });
   }
 
+  onSortEnd = ({oldIndex, newIndex}) => {
+    this.setState(({enemies}) => ({
+      enemies: arrayMove(enemies, oldIndex, newIndex),
+    }));
+  };
+
   statusSelect = (statusEffects, id) => {
     // TODO: GENERALIZE THIS - ITS NEAR IDENTICAL TO TOGGLEDEATH OTHER THAN FIELD UPDATED AND modalShown
     db.table(this.props.enemyTableName)
@@ -125,9 +132,7 @@ class EnemyContainer extends Component {
   render() {
     return (
   		<div className={`enemy-list ${this.props.enemyTableName === 'dmEnemies' ? 'dm-enemy-list' : ''}`}>
-        <div className="enemy-item-wrap">
-    			<EnemyList enemies={this.state.enemies} toggleModal={this.toggleModal} />
-        </div>
+    		<EnemyList enemies={this.state.enemies} toggleModal={this.toggleModal} onSortEnd={this.onSortEnd} />
   			<EnemyCreate addEnemy={this.addEnemy} tableName={this.props.enemyTableName} />
         <button className="clear-all" onClick={this.clearAllEnemies}>Clear All</button>
         <DamageModal
