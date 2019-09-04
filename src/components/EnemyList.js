@@ -24,7 +24,7 @@ const EnemyList = props => {
     );
   });
 
-  return <SortableList items={props.enemies} onSortEnd={props.onSortEnd} pressDelay={500}/>;
+  return <SortableList items={props.enemies} onSortEnd={props.onSortEnd} pressDelay={300} pressThreshold={5} lockAxis='y' />;
 }
 
 export default EnemyList;

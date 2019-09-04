@@ -3,6 +3,13 @@
 body {
 	color: black;
 	font-family: $font-family;
+	> .enemy-item {
+		border: none;
+		box-shadow: 0 0 7px rgba(0,0,0,.5);
+		margin-left: 10px;
+		border-radius: 5px;
+		width: calc(100% - 20px) !important;
+	}
 }
 
 #root {
