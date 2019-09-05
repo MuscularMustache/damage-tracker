@@ -16,7 +16,8 @@ class EnemyContainer extends Component {
     db.table(this.props.enemyTableName)
       .toArray()
       .then((enemies) => {
-        this.setState({ enemies });
+        // sort enemies by their initiative
+        this.setState({ enemies: enemies.sort((a, b) => a.initiative - b.initiative) });
       });
   }
 
@@ -27,7 +28,8 @@ class EnemyContainer extends Component {
       damage: 0,
       alive: true,
       damageHistory: [],
-      statusEffects: []
+      statusEffects: [],
+      initiative: this.state.enemies.length
     };
     db.table(this.props.enemyTableName)
       .add(enemy)
@@ -105,9 +107,16 @@ class EnemyContainer extends Component {
   }
 
   onSortEnd = ({oldIndex, newIndex}) => {
-    this.setState(({enemies}) => ({
-      enemies: arrayMove(enemies, oldIndex, newIndex),
-    }));
+    let enemies = arrayMove(this.state.enemies, oldIndex, newIndex);
+
+    this.setState({ enemies }, () => {
+      // come up with a better way of writeing this
+      // maybe try Use bulkPut instead of looping
+      enemies.forEach((enemy, index) => {
+        db.table(this.props.enemyTableName)
+          .update(enemy.id, { initiative: index })
+      });
+    });
   };
 
   statusSelect = (statusEffects, id) => {
