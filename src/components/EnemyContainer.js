@@ -107,6 +107,10 @@ class EnemyContainer extends Component {
   }
 
   onSortEnd = ({oldIndex, newIndex}) => {
+    navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
+    if (navigator.vibrate) {
+      navigator.vibrate(15);
+    }
     let enemies = arrayMove(this.state.enemies, oldIndex, newIndex);
 
     this.setState({ enemies }, () => {

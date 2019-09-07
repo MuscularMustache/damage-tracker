@@ -24,7 +24,23 @@ const EnemyList = props => {
     );
   });
 
-  return <SortableList items={props.enemies} onSortEnd={props.onSortEnd} pressDelay={300} pressThreshold={5} lockAxis='y' />;
+  const onSortStart = () => {
+    navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
+    if (navigator.vibrate) {
+      navigator.vibrate(15);
+    }
+  }
+
+  return (
+    <SortableList
+      items={props.enemies}
+      onSortStart={onSortStart}
+      onSortEnd={props.onSortEnd}
+      pressDelay={300}
+      pressThreshold={5}
+      lockAxis='y'
+    />
+  );
 }
 
 export default EnemyList;
