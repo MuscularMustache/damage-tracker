@@ -1,7 +1,7 @@
 {
-  "short_name": "Damage Tracker",
+  "short_name": "DMG Tracker",
   "name": "Damage Tracker",
-  "description": "simple damage tracker to keep track of damage and initiative in D&D as and other tabletop rpg games",
+  "description": "A Simple damage tracker to keep track of damage and initiative in D&D and other tabletop rpg games.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -19,8 +19,9 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "start_url": "./",
   "display": "standalone",
   "theme_color": "#a090ff",
-  "background_color": "#9c99fe"
+  "background_color": "#9c99fe",
+  "orientation": "portrait",
 }
