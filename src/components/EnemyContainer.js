@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import arrayMove from 'array-move';
 import EnemyCreate from './EnemyCreate';
 import EnemyList from './EnemyList';
 import DamageModal from './DamageModal';
@@ -15,7 +16,8 @@ class EnemyContainer extends Component {
     db.table(this.props.enemyTableName)
       .toArray()
       .then((enemies) => {
-        this.setState({ enemies });
+        // sort enemies by their initiative
+        this.setState({ enemies: enemies.sort((a, b) => a.initiative - b.initiative) });
       });
   }
 
@@ -26,7 +28,8 @@ class EnemyContainer extends Component {
       damage: 0,
       alive: true,
       damageHistory: [],
-      statusEffects: []
+      statusEffects: [],
+      initiative: this.state.enemies.length
     };
     db.table(this.props.enemyTableName)
       .add(enemy)
@@ -103,6 +106,23 @@ class EnemyContainer extends Component {
     this.setState({ modalShown: !this.state.modalShown, modalActive: modalName || '', activeEnemy: enemy || {} });
   }
 
+  onSortEnd = ({oldIndex, newIndex}) => {
+    navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
+    if (navigator.vibrate) {
+      navigator.vibrate(15);
+    }
+    let enemies = arrayMove(this.state.enemies, oldIndex, newIndex);
+
+    this.setState({ enemies }, () => {
+      // come up with a better way of writeing this
+      // maybe try Use bulkPut instead of looping
+      enemies.forEach((enemy, index) => {
+        db.table(this.props.enemyTableName)
+          .update(enemy.id, { initiative: index })
+      });
+    });
+  };
+
   statusSelect = (statusEffects, id) => {
     // TODO: GENERALIZE THIS - ITS NEAR IDENTICAL TO TOGGLEDEATH OTHER THAN FIELD UPDATED AND modalShown
     db.table(this.props.enemyTableName)
@@ -125,9 +145,7 @@ class EnemyContainer extends Component {
   render() {
     return (
   		<div className={`enemy-list ${this.props.enemyTableName === 'dmEnemies' ? 'dm-enemy-list' : ''}`}>
-        <div className="enemy-item-wrap">
-    			<EnemyList enemies={this.state.enemies} toggleModal={this.toggleModal} />
-        </div>
+    		<EnemyList enemies={this.state.enemies} toggleModal={this.toggleModal} onSortEnd={this.onSortEnd} />
   			<EnemyCreate addEnemy={this.addEnemy} tableName={this.props.enemyTableName} />
         <button className="clear-all" onClick={this.clearAllEnemies}>Clear All</button>
         <DamageModal

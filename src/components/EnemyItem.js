@@ -8,32 +8,6 @@ const EnemyItem = ({enemy, toggleModal}) => {
 
   const isDm = enemy.maxHealth !== 'noHealth';
 
-  function EnemyNameAndHealth() {
-    if (!isDm) {
-      return (
-        <p onClick={() => toggleModal(enemy, 'damageModal')} className="unselect">
-          {enemy.statusEffects ? enemy.statusEffects.map(se => <span key={se.value} className={`${se.icon} ${se.value}`}></span>) : ''}
-          {enemy.name} - <strong>{enemy.damage}</strong>pts of damage
-        </p>
-      );
-    } else {
-      return (
-        <p onClick={() => toggleModal(enemy, 'damageModal')} className="unselect">
-          {enemy.statusEffects ? enemy.statusEffects.map(se => <span key={se.value} className={`${se.icon} ${se.value}`}></span>) : ''}
-          {enemy.name}: <strong>{enemy.maxHealth - enemy.damage}</strong> / {enemy.maxHealth}
-        </p>
-      );
-    }
-  }
-
-  function EnemyStatusEffects() {
-    if (enemy.statusEffects) {
-      return <p className="status-effects">{enemy.statusEffects.map(se => <span key={se.value} className={se.value}>{se.label}</span>)}</p>
-    } else {
-      return <p className="status-effects" />
-    }
-  }
-
   let healthPercentage = ((enemy.maxHealth-enemy.damage)/enemy.maxHealth)*100;
 
   // this overwrites the css to create a "health bar"
@@ -62,10 +36,21 @@ const EnemyItem = ({enemy, toggleModal}) => {
     itemStyle = {}
   }
 
+  // NOTE: the reason the multi-line ternary is in place is because of a bug that was on mobile when reordering components
 	return (
     <div className={enemy.alive ? 'enemy-item' : 'enemy-item dead'} style={itemStyle}>
-      <EnemyNameAndHealth />
-      <EnemyStatusEffects />
+      <p onClick={() => toggleModal(enemy, 'damageModal')} className="unselect">
+        {enemy.statusEffects ? enemy.statusEffects.map(se => <span key={se.value} className={`${se.icon} ${se.value}`}></span>) : ''}
+        {isDm ? (
+          <span>{enemy.name}: <strong>{enemy.maxHealth - enemy.damage}</strong> / {enemy.maxHealth}</span>
+        ) : (
+          <span>{enemy.name} - <strong>{enemy.damage}</strong>pts of damage</span>
+        )}
+      </p>
+
+      <p className="status-effects">
+        {enemy.statusEffects ? enemy.statusEffects.map(se => <span key={se.value} className={se.value}>{se.label}</span>) : ''}
+      </p>
       <i className="material-icons icon-button" onClick={() => toggleModal(enemy, 'optionModal')}>more_vert</i>
     </div>
   );
