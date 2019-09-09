@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import App from './components/App';
 import EnemyContainer from './components/EnemyContainer';
 import LandingPage from './components/LandingPage';
+import './styles/index.scss';
 import * as serviceWorker from './serviceWorker';
 
 const Root = () => (

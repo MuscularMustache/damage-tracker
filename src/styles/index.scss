@@ -1,94 +1,94 @@
-// NOTE - this file is kept around for future design changes.
+// NOTE - minify this file and add it to index.html to see if load times improve
 // This file contains the app shell. If working on a redesign:
 // 1) uncomment this file
 // 2) Add in the import back to index.js - import './styles/index.scss';
 // 3) Delete minified css block from index.html that includes the app shell
 
 
-// @import 'variables';
-//
-// body {
-// 	color: black;
-// 	font-family: $font-family;
-// 	> .enemy-item {
-// 		border: none;
-// 		box-shadow: 0 0 7px rgba(0,0,0,.5);
-// 		margin-left: 10px;
-// 		border-radius: 5px;
-// 		width: calc(100% - 20px) !important;
-// 	}
-// }
-//
-// #root {
-// 	position: absolute;
-// 	width: 100%;
-// 	height: 100%;
-// 	background: $bg-gradient;
-// }
-//
-//
-// i, .unselect {
-//   -webkit-user-select: none;
-//   -moz-user-select: none;
-//   -ms-user-select: none;
-//   user-select: none;
-// }
-//
-// .icon-button {
-//   display: block;
-//   background: $dark-purple;
-//   box-shadow: $shadow;
-//   width: 50px;
-//   height: 50px;
-//   min-width: 50px;
-//   max-width: 50px;
-//   border-radius: 50%;
-//   text-align: center;
-//   line-height: 50px;
-//   color: white;
-// 	padding: 12px;
-// 	box-sizing: border-box;
-// 	> img {
-// 		// turn svgs from black to white
-// 		filter: invert(100%);
-// 		display: block;
-// 		margin: 1px auto;
-// 	}
-// }
-//
-// .icon-text-button {
-//   display: flex;
-//   border-radius: 50px;
-//   padding: 0;
-//   border: 0;
-//   background: $darker-purple;
-//   box-shadow: $shadow;
-//   outline: none;
-//   min-width: 160px;
-//   span {
-//     width: 100%;
-//     line-height: 50px;
-//     color: white;
-//     margin-right: 10px;
-//   }
-// }
-//
-// input[type=number]::-webkit-inner-spin-button,
-// input[type=number]::-webkit-outer-spin-button {
-//   -webkit-appearance: none;
-//   margin: 0;
-// }
-//
-// .link-button {
-//   background: $darker-purple;
-//   border-radius: 5px;
-//   box-shadow: $shadow;
-//   box-sizing: border-box;
-//   color: white;
-//   display: block;
-//   margin: 40px 20px;
-//   padding: 10px;
-//   text-align: center;
-//   text-decoration: none;
-//   width: calc(100% - 40px);
-// }
+@import 'variables';
+
+body {
+	color: black;
+	font-family: $font-family;
+	> .enemy-item {
+		border: none;
+		box-shadow: 0 0 7px rgba(0,0,0,.5);
+		margin-left: 10px;
+		border-radius: 5px;
+		width: calc(100% - 20px) !important;
+	}
+}
+
+#root {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: $bg-gradient;
+}
+
+
+i, .unselect {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.icon-button {
+  display: block;
+  background: $dark-purple;
+  box-shadow: $shadow;
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+  max-width: 50px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 50px;
+  color: white;
+	padding: 12px;
+	box-sizing: border-box;
+	> img {
+		// turn svgs from black to white
+		filter: invert(100%);
+		display: block;
+		margin: 1px auto;
+	}
+}
+
+.icon-text-button {
+  display: flex;
+  border-radius: 50px;
+  padding: 0;
+  border: 0;
+  background: $darker-purple;
+  box-shadow: $shadow;
+  outline: none;
+  min-width: 160px;
+  span {
+    width: 100%;
+    line-height: 50px;
+    color: white;
+    margin-right: 10px;
+  }
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.link-button {
+  background: $darker-purple;
+  border-radius: 5px;
+  box-shadow: $shadow;
+  box-sizing: border-box;
+  color: white;
+  display: block;
+  margin: 40px 20px;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  width: calc(100% - 40px);
+}
