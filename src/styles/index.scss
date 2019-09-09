@@ -1,4 +1,10 @@
-// NOTE - this file is kept around for
+// NOTE - this file is kept around for future design changes.
+// This file contains the app shell. If working on a redesign:
+// 1) uncomment this file
+// 2) Add in the import back to index.js - import './styles/index.scss';
+// 3) Delete minified css block from index.html that includes the app shell
+
+
 // @import 'variables';
 //
 // body {
