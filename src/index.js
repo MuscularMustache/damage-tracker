@@ -6,7 +6,6 @@ import App from './components/App';
 import EnemyContainer from './components/EnemyContainer';
 import LandingPage from './components/LandingPage';
 import * as serviceWorker from './serviceWorker';
-import './styles/index.scss';
 
 const Root = () => (
   <Router>
