@@ -39,6 +39,14 @@ i, .unselect {
   text-align: center;
   line-height: 50px;
   color: white;
+	padding: 12px;
+	box-sizing: border-box;
+	> img {
+		// turn svgs from black to white
+		filter: invert(100%);
+		display: block;
+		margin: 1px auto;
+	}
 }
 
 .icon-text-button {

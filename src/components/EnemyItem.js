@@ -51,7 +51,9 @@ const EnemyItem = ({enemy, toggleModal}) => {
       <p className="status-effects">
         {enemy.statusEffects ? enemy.statusEffects.map(se => <span key={se.value} className={se.value}>{se.label}</span>) : ''}
       </p>
-      <i className="material-icons icon-button" onClick={() => toggleModal(enemy, 'optionModal')}>more_vert</i>
+      <span className="icon-button" onClick={() => toggleModal(enemy, 'optionModal')}>
+        <img src={process.env.PUBLIC_URL + '/images/more_vert.svg'} alt="more character options" />
+      </span>
     </div>
   );
 }

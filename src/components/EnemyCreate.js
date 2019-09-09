@@ -27,6 +27,7 @@ class EnemyCreate extends Component {
 		if (this.props.tableName === 'dmEnemies') {
 			return (
 				<input
+					aria-label="enemyMaxHealth"
 					onChange={e => this.onInputChange(e, 'enemyMaxHealth')}
 					value={this.state.enemyMaxHealth}
 					type='number'
@@ -43,6 +44,7 @@ class EnemyCreate extends Component {
 			<div className="enemy-create">
         <div className="enemy-input">
           <input
+						aria-label="enemyName"
             onChange={e => this.onInputChange(e, 'enemyName')}
             value={this.state.enemyName}
 						onKeyDown={this.keyPress}
@@ -51,7 +53,7 @@ class EnemyCreate extends Component {
           />
 					{this.healthInput()}
           <button className="icon-text-button" onClick={this.addEnemy}>
-            <i className="material-icons icon-button">add</i>
+            <span className="fas fa-plus icon-button" />
             <span>
               Add Enemy
             </span>

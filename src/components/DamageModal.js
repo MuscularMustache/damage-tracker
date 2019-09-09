@@ -69,7 +69,9 @@ class DamageModal extends Component {
             <h2>
               {this.state.isDm ? activeEnemy.maxHealth - activeEnemy.damage : activeEnemy.damage} {this.state.symbol} {this.state.damage}
             </h2>
-            <i className="material-icons icon-button" onClick={this.deleteChar}>backspace</i>
+            <span className="icon-button" onClick={this.deleteChar}>
+              <img src={process.env.PUBLIC_URL + '/images/backspace.svg'} alt="delete character" />
+            </span>
           </header>
           <div className="row">
             <button onClick={() => this.buttonClick(7)}>7</button>
