@@ -5,7 +5,7 @@
   "dependencies": {
     "array-move": "^2.1.0",
     "chroma-js": "^2.1.0",
-    "dexie": "^2.0.4",
+    "dexie": "^3.0.2",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.0",
