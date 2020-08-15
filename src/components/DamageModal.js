@@ -26,10 +26,18 @@ class DamageModal extends Component {
 
   evaluateDamage = type => {
     const { activeEnemy } = this.props;
-    const stateDamage = parseInt(this.state.damage);
-    const activeDamage = parseInt(activeEnemy.damage);
-    const damage = type === 'heal' ? activeDamage - stateDamage : activeDamage + stateDamage;
+    const previousDamage = parseInt(this.state.damage);
+    const currentDamage = parseInt(activeEnemy.damage);
+    let totalDamage;
     let appendedDamage;
+
+    if (type === 'heal' && activeEnemy.maxHealth !== 'noHealth') {
+        totalDamage = Math.sign(currentDamage - previousDamage) === -1 ? 0 : currentDamage - previousDamage;
+    } else if (type === 'heal') {
+        totalDamage = (currentDamage - previousDamage) < 0 ? 0 : currentDamage - previousDamage;
+    } else {
+      totalDamage = currentDamage + previousDamage;
+    }
 
     if (this.state.isDm) {
       appendedDamage = type === 'heal' ? `+ ${this.state.damage}` : `- ${this.state.damage}`;
@@ -39,7 +47,7 @@ class DamageModal extends Component {
 
     const damageHistory = [...activeEnemy.damageHistory, appendedDamage];
 
-    this.props.evaluateDamage(activeEnemy.id, damage, damageHistory);
+    this.props.evaluateDamage(activeEnemy.id, totalDamage, damageHistory);
     this.setState({ damage: ''});
   }
 
