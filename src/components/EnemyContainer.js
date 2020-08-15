@@ -27,6 +27,7 @@ class EnemyContainer extends Component {
       maxHealth: parseInt(enemyMaxHealth) || 'noHealth',
       damage: 0,
       alive: true,
+      armorClass: 0,
       damageHistory: [],
       statusEffects: [],
       initiative: this.state.enemies.length
@@ -48,13 +49,15 @@ class EnemyContainer extends Component {
       });
   }
 
-  toggleDeath = (id, alive) => {
+  toggleDeath = (id, alive, maxHealth) => {
+    const fieldsToUpdate = { alive };
+    if (alive && maxHealth !== 'noHealth') { fieldsToUpdate.damage = maxHealth - 1; }
     db.table(this.props.enemyTableName)
-      .update(id, { alive })
+      .update(id, fieldsToUpdate)
       .then(() => {
         let index;
         const enemyToUpdate = this.state.enemies.find(enemy => enemy.id === id);
-        const enemyObj = Object.assign({}, enemyToUpdate, { alive });
+        const enemyObj = Object.assign({}, enemyToUpdate, fieldsToUpdate);
         const newList = [
           ...this.state.enemies.filter((enemy, idx) => {
             if (enemy.id === id) { index = idx; }

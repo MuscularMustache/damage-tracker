@@ -94,7 +94,7 @@ const OptionModal = props => {
       <div className="buttons">
         <button
           className={activeEnemy.alive ? 'icon-text-button alive' : 'icon-text-button dead'}
-          onClick={() => props.toggleDeath(activeEnemy.id, !activeEnemy.alive)}
+          onClick={() => props.toggleDeath(activeEnemy.id, !activeEnemy.alive, activeEnemy.maxHealth)}
           >
           <span className={`fas fa-${activeEnemy.alive ? 'thumbs-down' : 'thumbs-up'} icon-button`} />
           <span>{activeEnemy.alive ? 'Oh you know he dead now' : 'HUZZAH! I\'m back!'}</span>
