@@ -36,16 +36,32 @@ const EnemyItem = ({enemy, toggleModal}) => {
     itemStyle = {}
   }
 
-  // NOTE: the reason the multi-line ternary is in place is because of a bug that was on mobile when reordering components
+  const enemyInfo = () => {
+    if (isDm) {
+      return (
+        <span className="enemyInfo">{enemy.name}: <strong>{enemy.maxHealth - enemy.damage}</strong> / {enemy.maxHealth}</span>
+      );
+    } else {
+      return (
+        <span className="enemyInfo">{enemy.name} - <strong>{enemy.damage}</strong>pts of damage</span>
+      );
+    }
+  }
+
+  const armorClass = () => {
+    if (enemy.armorClass) {
+      return (
+        <span className="enemy-ac"><span className='fas fa-shield-alt' />{enemy.armorClass}</span>
+      );
+    }
+  }
+
 	return (
     <div className={enemy.alive ? 'enemy-item' : 'enemy-item dead'} style={itemStyle}>
       <p onClick={() => toggleModal(enemy, 'damageModal')} className="unselect">
         {enemy.statusEffects ? enemy.statusEffects.map(se => <span key={se.value} className={`${se.icon} ${se.value}`}></span>) : ''}
-        {isDm ? (
-          <span>{enemy.name}: <strong>{enemy.maxHealth - enemy.damage}</strong> / {enemy.maxHealth}</span>
-        ) : (
-          <span>{enemy.name} - <strong>{enemy.damage}</strong>pts of damage</span>
-        )}
+        {armorClass()}
+        {enemyInfo()}
       </p>
 
       <p className="status-effects">

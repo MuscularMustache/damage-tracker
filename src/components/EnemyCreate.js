@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../styles/enemycreate.scss';
 
 class EnemyCreate extends Component {
-	state = { enemyName: '', enemyMaxHealth: '' }
+	state = { enemyName: '', enemyMaxHealth: '', enemyArmorClass: '' }
 
   onInputChange = (event, stateName) => {
     this.setState({ [stateName]: event.target.value });
@@ -13,13 +13,29 @@ class EnemyCreate extends Component {
 			return;
 		}
 
-    this.setState({ enemyName: '', enemyMaxHealth: '' });
-    this.props.addEnemy(this.state.enemyName, this.state.enemyMaxHealth);
+    this.setState({ enemyName: '', enemyMaxHealth: '', enemyArmorClass: '' });
+    this.props.addEnemy(this.state.enemyName, this.state.enemyMaxHealth, this.state.enemyArmorClass);
   }
 
 	keyPress = e => {
 		if (e.keyCode === 13){
 			this.addEnemy();
+		}
+	}
+
+	armorClassInput = () => {
+		if (this.props.tableName === 'dmEnemies') {
+			return (
+				<input
+					aria-label="enemyArmorClass"
+					onChange={e => this.onInputChange(e, 'enemyArmorClass')}
+					value={this.state.enemyArmorClass}
+					type='number'
+					onKeyDown={this.keyPress}
+					className="standard-input"
+					placeholder="AC"
+				/>
+			);
 		}
 	}
 
@@ -51,6 +67,7 @@ class EnemyCreate extends Component {
             className="standard-input"
 						placeholder="Enemy"
           />
+					{this.armorClassInput()}
 					{this.healthInput()}
           <button className="icon-text-button" onClick={this.addEnemy}>
             <span className="fas fa-plus icon-button" />

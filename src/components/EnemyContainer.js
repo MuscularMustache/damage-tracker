@@ -21,13 +21,13 @@ class EnemyContainer extends Component {
       });
   }
 
-  addEnemy = (name, enemyMaxHealth) => {
+  addEnemy = (name, enemyMaxHealth, enemyArmorClass) => {
     const enemy = {
       name,
       maxHealth: parseInt(enemyMaxHealth) || 'noHealth',
       damage: 0,
       alive: true,
-      armorClass: 0,
+      armorClass: parseInt(enemyArmorClass) || 0,
       damageHistory: [],
       statusEffects: [],
       initiative: this.state.enemies.length
